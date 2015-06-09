@@ -61,6 +61,11 @@ public class Position
 		return world.getBlock(x, y, z);
 	}
 	
+	public boolean isAirBlock(IBlockAccess world)
+	{
+		return world.isAirBlock(x, y, z);
+	}
+	
 	public int getMeta(IBlockAccess world)
 	{
 		return world.getBlockMetadata(x, y, z);

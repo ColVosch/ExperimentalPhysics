@@ -1,8 +1,6 @@
 package colVosch.experimentalPhysics.entitys;
 
-import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 
@@ -40,8 +38,7 @@ public class EntityEndStoneAsteroid extends Entity
 		moveEntity(motionX, motionY, motionZ);
 		
 		if (!worldObj.isRemote) {
-			Block block = worldObj.getBlock((int) posX, (int) posY - 1, (int) posZ);
-			boolean isOnGround = !(block.isAir(worldObj, (int) posX, (int) posY, (int) posZ) || block == Blocks.air);
+			boolean isOnGround = !(worldObj.isAirBlock((int) posX, (int) posY - 1, (int) posZ));
 			boolean isImmobile = Math.abs(motionX) < 0.01D && Math.abs(motionY) < 0.01D && Math.abs(motionZ) < 0.01D;
 			if (isOnGround || isImmobile) {
 				makeImpact();

@@ -53,17 +53,6 @@ public class SpaceField
 	public void addTensionPoint(Position pos, int strength)
 	{
 		TensionPoint tensionPoint = new TensionPoint(pos, strength);
-		//TODO redundant?
-//		Iterator i = tensionPoints.iterator();
-//		while (i.hasNext())
-//		{		
-//			TensionPoint p = (TensionPoint) i.next();		
-//			if (p.x == tensionPoint.x && p.y == tensionPoint.y && p.z == tensionPoint.z)
-//			{
-//				tensionPoint.strength += p.strength;
-//				i.remove();
-//			}
-//		}
 		tensionPoints.add(tensionPoint);
 	}
 	

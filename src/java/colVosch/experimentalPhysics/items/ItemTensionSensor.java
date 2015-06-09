@@ -1,8 +1,8 @@
 package colVosch.experimentalPhysics.items;
 
 import colVosch.experimentalPhysics.ExperimentalPhysics;
-import colVosch.experimentalPhysics.entitys.EntityEndStoneAsteroid;
 import colVosch.experimentalPhysics.spaceField.SpaceFieldManager;
+import colVosch.experimentalPhysics.spaceField.events.SpaceFieldEvents;
 import colVosch.experimentalPhysics.util.Position;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,7 +24,7 @@ public class ItemTensionSensor extends Item
 		GameRegistry.registerItem(this, name);
 	}
 
-	 public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
+	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
     {
         if (!(player.capabilities.isCreativeMode))
         {
@@ -39,11 +39,11 @@ public class ItemTensionSensor extends Item
 
 		
 		if (!world.isRemote)
-		{
-			world.spawnEntityInWorld(new EntityEndStoneAsteroid(world, x, y - 10, z));
+		{		
+			//SpaceFieldEvents.triggerSpaceFieldEventAt(world, new Position((int) player.posX, (int) player.posY - 3, (int) player.posZ), 10, world.rand);
+			//world.spawnEntityInWorld(new EntityEndStoneAsteroid(world, x, y - 10, z));
 			player.addChatMessage(new ChatComponentText(Float.toString(SpaceFieldManager.spaceFields.get(world.provider.dimensionId).getTensionStrengthAt(new Position(x, y, z)))));
 		}
 		return true;
     }
-	
 }

@@ -10,5 +10,7 @@ public interface ISpaceFieldEvent
 	 * @param pos
 	 * @return Whether or not the space field event succeeded.
 	 */
-	public boolean trigger(World world, Position pos);
+	public void trigger(World world, Position pos);
+	public boolean canTrigger(World world, Position pos, float strength);
+
 }
