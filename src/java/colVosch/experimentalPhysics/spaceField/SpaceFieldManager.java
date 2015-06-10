@@ -9,6 +9,7 @@ import org.apache.logging.log4j.Level;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent.WorldTickEvent;
+import cpw.mods.fml.relauncher.Side;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.WorldServer;
@@ -77,7 +78,7 @@ public class SpaceFieldManager
 	@SubscribeEvent
 	public void attemptSpaceFieldEvent(WorldTickEvent e)
 	{
-		if (!e.world.isRemote)
+		if (e.side == Side.SERVER)
 		{
 			spaceFields.get(e.world.provider.dimensionId).tryTriggerSpaceFieldEvent();
 		}

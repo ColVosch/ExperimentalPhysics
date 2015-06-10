@@ -12,6 +12,7 @@ public class ExpPhysConfig
 	
 	private static int coolDownFactor;
 	private static int spaceTensionRangeAmplifier;
+	private static int spaceEventFrequency;
 	
 	public static void init(File location)
 	{
@@ -21,6 +22,7 @@ public class ExpPhysConfig
 		thermConstantTierIron = config.getFloat("tierIronTherm", Configuration.CATEGORY_GENERAL, 0.1781f, 0, 2, StatCollector.translateToLocal("propperty.tier1ThermConstant.comment"), "propperty.tier1ThermConstant.display");
 		coolDownFactor = config.getInt("coolDownFactor", Configuration.CATEGORY_GENERAL, 1000, 1, 1000, StatCollector.translateToLocal("propperty.coolDownFactor.comment"), "propperty.coolDownFactor.display");
 		spaceTensionRangeAmplifier = config.getInt("spaceTensionRangeAmplifier", Configuration.CATEGORY_GENERAL, 50, 1, 100, StatCollector.translateToLocal("propperty.spaceTensionRangeAmplifier.comment"), "propperty.spaceTensionRangeAmplifier.display");
+		spaceEventFrequency = 100 - config.getInt("spaceEventFrequency", Configuration.CATEGORY_GENERAL, 90, 0, 100, StatCollector.translateToLocal("propperty.spaceEventFrequency.comment"), "propperty.spaceEventFrequency.display");
 		
 		config.save();
 	}
@@ -44,5 +46,9 @@ public class ExpPhysConfig
 	{
 		return spaceTensionRangeAmplifier;
 	}
-	
+
+	public static int getSpaceEventFrequency() 
+	{
+		return spaceEventFrequency;
+	}
 }

@@ -1,9 +1,11 @@
 itemGroup.experimentalPhysics=Experimental Physics
 
 propperty.tier1MaxHeat.display=Iron tier maximum heat
-propperty.tier1MaxHeat.comment=The highest temperature at witch the iron tech tier is able to operate
-propperty.spaceTensionRangeAmplifier.display=Tension Amplifier
-propperty.spaceTensionRangeAmplifier.comment=The larger this value, the more impact do tension points have
+propperty.tier1MaxHeat.comment=The highest temperature at witch the iron tech-tier is able to operate
+propperty.spaceTensionRangeAmplifier.display=Tension amplifier
+propperty.spaceTensionRangeAmplifier.comment=The larger this value, the larger of an impact do tension points have
+propperty.spaceEventFrequency.display=Tension effect frequency
+propperty.spaceEventFrequency.comment=The larger this value, the more frequently will tension effect the environment
 
 container.refiner=Refiner
 container.advancedRefinerInsertionLock=Advanced Refiner Insertion Lock

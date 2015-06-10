@@ -16,15 +16,16 @@ import net.minecraftforge.common.DimensionManager;
 
 public class SpaceField
 {
-	
-	public ArrayList<TensionPoint> tensionPoints;
-	int dimensionId;
+	public int dimensionId;
+	private ArrayList<TensionPoint> tensionPoints;
+	private byte tickCounter = 0;
 	
 	public Random rndGen;
 	
 	public SpaceField(int dimensionId)
 	{
 		tensionPoints = new ArrayList<TensionPoint>();
+		tickCounter = 0;
 		rndGen = new Random();
 		
 		this.dimensionId = dimensionId;
@@ -33,17 +34,17 @@ public class SpaceField
 	public void readFromNBT(NBTBase tag)
 	{
 		NBTTagList tensionTagList = (NBTTagList) tag;
-		for (int i = 0; i < tensionTagList.tagCount(); i++)
-		{
+		for (int i = 0; i < tensionTagList.tagCount(); i++) {
 			tensionPoints.add(TensionPoint.tensionPointFromNBT(tensionTagList.getCompoundTagAt(i)));
 		}
+		
+		tickCounter = 0;
 	}
 
 	public NBTTagList writeToNBT()
 	{
 		NBTTagList tensionTagList = new NBTTagList();
-		for (TensionPoint tensionPoint : tensionPoints)
-		{
+		for (TensionPoint tensionPoint : tensionPoints) {
 			tensionTagList.appendTag(tensionPoint.writeToNBT(new NBTTagCompound()));
 		}
 		return tensionTagList;
@@ -59,11 +60,9 @@ public class SpaceField
 	public void removeTensionPoint(Position pos)
 	{
 		Iterator<TensionPoint> i = tensionPoints.iterator();
-		while (i.hasNext())
-		{
+		while (i.hasNext()) {
 			TensionPoint point = (TensionPoint) i.next();
-			if (point.x == pos.x && point.y == pos.y && point.z == pos.z)
-			{
+			if (point.x == pos.x && point.y == pos.y && point.z == pos.z) {
 				i.remove();
 			}
 		}
@@ -71,9 +70,15 @@ public class SpaceField
 
 	public void tryTriggerSpaceFieldEvent()
 	{
+		tickCounter ++;
+		tickCounter %= ExpPhysConfig.getSpaceEventFrequency();
+		
+		if (tickCounter != 0) {
+			return;
+		}
+		
 		List<?> players = DimensionManager.getWorld(dimensionId).playerEntities;
-		if (players.size() == 0)
-		{
+		if (players.size() == 0) {
 			return;
 		}
 		
@@ -93,8 +98,7 @@ public class SpaceField
 	public void tryTriggerSpaceFieldEventAt(Position pos)
 	{
 		float strength = getTensionStrengthAt(pos);
-		if (rndGen.nextFloat() <= Math.abs(strength) / 100)
-		{
+		if (rndGen.nextFloat() <= Math.abs(strength) / 100) {
 			SpaceFieldEvents.triggerSpaceFieldEventAt(DimensionManager.getWorld(dimensionId), pos, strength, rndGen);
 		}
 	}
@@ -103,8 +107,7 @@ public class SpaceField
 	{
 		float dist;
 		float strength = 0;
-		for (TensionPoint tensionPoint : tensionPoints)
-		{
+		for (TensionPoint tensionPoint : tensionPoints) {
 			dist = pos.getDistance(tensionPoint);
 			strength += (tensionPoint.strength / (Math.pow(dist, 2d) / ExpPhysConfig.getSpaceTensionRangeAmplifier() + 1));
 		}
