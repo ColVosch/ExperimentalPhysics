@@ -2,7 +2,6 @@ package colVosch.experimentalPhysics.items;
 
 import colVosch.experimentalPhysics.ExperimentalPhysics;
 import colVosch.experimentalPhysics.spaceField.SpaceFieldManager;
-import colVosch.experimentalPhysics.spaceField.events.SpaceFieldEvents;
 import colVosch.experimentalPhysics.util.Position;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.entity.player.EntityPlayer;
@@ -39,9 +38,7 @@ public class ItemTensionSensor extends Item
 
 		
 		if (!world.isRemote)
-		{		
-			//SpaceFieldEvents.triggerSpaceFieldEventAt(world, new Position((int) player.posX, (int) player.posY - 3, (int) player.posZ), 10, world.rand);
-			//world.spawnEntityInWorld(new EntityEndStoneAsteroid(world, x, y - 10, z));
+		{
 			player.addChatMessage(new ChatComponentText(Float.toString(SpaceFieldManager.spaceFields.get(world.provider.dimensionId).getTensionStrengthAt(new Position(x, y, z)))));
 		}
 		return true;

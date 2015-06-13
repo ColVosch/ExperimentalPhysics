@@ -10,8 +10,7 @@ public class EntityEndStoneAsteroid extends Entity
 	public EntityEndStoneAsteroid(World world)
 	{
 		super(world);
-		setSize(2.5F, 2.5F);
-		
+		setSize(0.5F, 0.5F);
 	}
 	
 	public EntityEndStoneAsteroid(World world, double x, double y, double z)
@@ -42,6 +41,12 @@ public class EntityEndStoneAsteroid extends Entity
 			boolean isImmobile = Math.abs(motionX) < 0.01D && Math.abs(motionY) < 0.01D && Math.abs(motionZ) < 0.01D;
 			if (isOnGround || isImmobile) {
 				makeImpact();
+			}
+		} else {
+			for (int i = 0; i < 50; i ++) {
+				//worldObj.spawnParticle("portal", posX + 0.5F, posY + 0.5F, posZ + 0.5F, rand.nextDouble(), rand.nextDouble(), rand.nextDouble());
+				worldObj.spawnParticle("depthsuspend", posX + rand.nextDouble(), posY + rand.nextDouble(), posZ + rand.nextDouble(), rand.nextDouble(), rand.nextDouble(), rand.nextDouble());
+				worldObj.spawnParticle("smoke", posX + 0.5F, posY + 0.5F, posZ + 0.5F, rand.nextDouble(), rand.nextDouble(), rand.nextDouble());				
 			}
 		}
 
