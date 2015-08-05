@@ -6,6 +6,7 @@ import colVosch.experimentalPhysics.ExperimentalPhysics;
 import colVosch.experimentalPhysics.constants.Tier;
 import colVosch.experimentalPhysics.constants.Tiers;
 import colVosch.experimentalPhysics.guis.GuiHandler;
+import colVosch.experimentalPhysics.reference.Particles;
 import colVosch.experimentalPhysics.tileEntitys.TileEntityAdvancedRefinerHeaterFurnace;
 import colVosch.experimentalPhysics.tileEntitys.TileEntityStoring;
 import colVosch.experimentalPhysics.util.Position;
@@ -19,14 +20,14 @@ import net.minecraft.world.World;
 
 public class BlockAdvancedRefinerHeaterFurnace extends BlockAdvancedRefinerPart implements ITileEntityProvider
 {		
-	private static final String name = "blockAdvancedRefinerHeaterFurnace";
+	public static final String NAME = "blockAdvancedRefinerHeaterFurnace";
 
 	public BlockAdvancedRefinerHeaterFurnace()
 	{
 		super();
-		setBlockName(name);
+		setBlockName(NAME);
 		setBlockTextureName(ExperimentalPhysics.MODID + ":advancedRefinerHeaterFurnaceFull");
-		GameRegistry.registerBlock(this, name);
+		GameRegistry.registerBlock(this, NAME);
 		GameRegistry.registerTileEntity(TileEntityAdvancedRefinerHeaterFurnace.class, TileEntityAdvancedRefinerHeaterFurnace.NAME);
 	}
 	
@@ -76,18 +77,18 @@ public class BlockAdvancedRefinerHeaterFurnace extends BlockAdvancedRefinerPart 
 	 {
 		 if (((TileEntityAdvancedRefinerHeaterFurnace) world.getTileEntity(x, y, z)).isBurning())
 		{
-			world.spawnParticle("flame", x + 1, y + rnd.nextFloat(), z + rnd.nextFloat(), 0, 0, 0);
-			world.spawnParticle("flame", x, y + rnd.nextFloat(), z + rnd.nextFloat(), 0, 0, 0);
-			world.spawnParticle("flame", x + rnd.nextFloat(), y + 1, z + rnd.nextFloat(), 0, 0, 0);
-			world.spawnParticle("flame", x + rnd.nextFloat(), y, z + rnd.nextFloat(), 0, 0, 0);
-			world.spawnParticle("flame", x + rnd.nextFloat(), y + rnd.nextFloat(), z + 1, 0, 0, 0);
-			world.spawnParticle("flame", x + rnd.nextFloat(), y + rnd.nextFloat(), z, 0, 0, 0);
-			world.spawnParticle("smoke", x + 1, y + rnd.nextFloat(), z + rnd.nextFloat(), 0, 0, 0);
-			world.spawnParticle("smoke", x, y + rnd.nextFloat(), z + rnd.nextFloat(), 0, 0, 0);
-			world.spawnParticle("smoke", x + rnd.nextFloat(), y + 1, z + rnd.nextFloat(), 0, 0, 0);
-			world.spawnParticle("smoke", x + rnd.nextFloat(), y, z + rnd.nextFloat(), 0, 0, 0);
-			world.spawnParticle("smoke", x + rnd.nextFloat(), y + rnd.nextFloat(), z + 1, 0, 0, 0);
-			world.spawnParticle("smoke", x + rnd.nextFloat(), y + rnd.nextFloat(), z, 0, 0, 0);
+			world.spawnParticle(Particles.FLAME, x + 1, y + rnd.nextFloat(), z + rnd.nextFloat(), 0, 0, 0);
+			world.spawnParticle(Particles.FLAME, x, y + rnd.nextFloat(), z + rnd.nextFloat(), 0, 0, 0);
+			world.spawnParticle(Particles.FLAME, x + rnd.nextFloat(), y + 1, z + rnd.nextFloat(), 0, 0, 0);
+			world.spawnParticle(Particles.FLAME, x + rnd.nextFloat(), y, z + rnd.nextFloat(), 0, 0, 0);
+			world.spawnParticle(Particles.FLAME, x + rnd.nextFloat(), y + rnd.nextFloat(), z + 1, 0, 0, 0);
+			world.spawnParticle(Particles.FLAME, x + rnd.nextFloat(), y + rnd.nextFloat(), z, 0, 0, 0);
+			world.spawnParticle(Particles.SMOKE, x + 1, y + rnd.nextFloat(), z + rnd.nextFloat(), 0, 0, 0);
+			world.spawnParticle(Particles.SMOKE, x, y + rnd.nextFloat(), z + rnd.nextFloat(), 0, 0, 0);
+			world.spawnParticle(Particles.SMOKE, x + rnd.nextFloat(), y + 1, z + rnd.nextFloat(), 0, 0, 0);
+			world.spawnParticle(Particles.SMOKE, x + rnd.nextFloat(), y, z + rnd.nextFloat(), 0, 0, 0);
+			world.spawnParticle(Particles.SMOKE, x + rnd.nextFloat(), y + rnd.nextFloat(), z + 1, 0, 0, 0);
+			world.spawnParticle(Particles.SMOKE, x + rnd.nextFloat(), y + rnd.nextFloat(), z, 0, 0, 0);
 		}
 	 }
 	 

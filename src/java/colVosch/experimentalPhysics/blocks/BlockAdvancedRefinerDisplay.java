@@ -15,7 +15,7 @@ import net.minecraft.world.World;
 public class BlockAdvancedRefinerDisplay extends BlockAdvancedRefinerPart implements ITileEntityProvider
 {
 
-	private static final String NAME = "blockAdvancedRefinerDisplay";
+	public static final String NAME = "blockAdvancedRefinerDisplay";
 
 	public BlockAdvancedRefinerDisplay()
 	{

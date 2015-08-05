@@ -1,5 +1,6 @@
 package colVosch.experimentalPhysics.tileEntitys;
 
+import colVosch.experimentalPhysics.reference.Localization;
 import colVosch.experimentalPhysics.util.Position;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.ItemStack;
@@ -58,7 +59,7 @@ public class TileEntityAdvancedRefinerHeaterFurnace extends TileEntityStoring im
 	@Override
 	public String getInventoryName()
 	{
-		return "container.advancedRefinerHeaterFurnace.name";
+		return Localization.Container.HEATER_FURNACE;
 	}
 
 	@Override

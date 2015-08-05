@@ -1,6 +1,7 @@
 package colVosch.experimentalPhysics.items;
 
 import colVosch.experimentalPhysics.ExperimentalPhysics;
+import colVosch.experimentalPhysics.reference.Sounds;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -14,17 +15,17 @@ import net.minecraft.world.World;
 
 public class ItemEnderPearlReusable extends Item
 {
-	private String name = "itemEnderPearlReusable";
+	public static final String NAME = "itemEnderPearlReusable";
 	
 	private IIcon[] icons;
 	
 	public ItemEnderPearlReusable()
 	{
-		setUnlocalizedName(name);
+		setUnlocalizedName(NAME);
 		setTextureName(ExperimentalPhysics.MODID+":enderPearlReusable");
 		setMaxStackSize(1);
 		setMaxDamage(8);
-		GameRegistry.registerItem(this, name);
+		GameRegistry.registerItem(this, NAME);
 	}	
 	
     @Override
@@ -35,7 +36,7 @@ public class ItemEnderPearlReusable extends Item
  
         for (int i = 0; i < icons.length; i++)
         {
-            icons[i] = par1IconRegister.registerIcon(ExperimentalPhysics.MODID + ":" + name + (i + 1));
+            icons[i] = par1IconRegister.registerIcon(ExperimentalPhysics.MODID + ":" + NAME + (i + 1));
         }
     }
 	
@@ -51,7 +52,7 @@ public class ItemEnderPearlReusable extends Item
             }
         }
 
-		world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+		world.playSoundAtEntity(player, Sounds.BOW, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 		
 		if (!world.isRemote)
 		{

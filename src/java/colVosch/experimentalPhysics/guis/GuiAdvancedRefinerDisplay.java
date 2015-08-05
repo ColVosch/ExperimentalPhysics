@@ -28,6 +28,7 @@ public class GuiAdvancedRefinerDisplay extends GuiContainer
 		FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 		if (display != null)
 		{
+			//TODO localize!
 			drawString(fontRenderer, String.format("Progress:     %4.2f %%", display.getProgressPercentage()), 5, 5, Color.WHITE.getRGB());
 			drawString(fontRenderer, String.format("Heat:         %5.2f",  display.getHeat()), 5, 15, Color.WHITE.getRGB());
 		}

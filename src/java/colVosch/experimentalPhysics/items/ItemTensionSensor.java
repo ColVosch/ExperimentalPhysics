@@ -1,6 +1,7 @@
 package colVosch.experimentalPhysics.items;
 
 import colVosch.experimentalPhysics.ExperimentalPhysics;
+import colVosch.experimentalPhysics.reference.Sounds;
 import colVosch.experimentalPhysics.spaceField.SpaceFieldManager;
 import colVosch.experimentalPhysics.util.Position;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -12,15 +13,15 @@ import net.minecraft.world.World;
 
 public class ItemTensionSensor extends Item
 {
-	public static final String name = "itemTensionSensor";
+	public static final String NAME = "itemTensionSensor";
 	
 	public ItemTensionSensor()
 	{
-		setUnlocalizedName(name);
+		setUnlocalizedName(NAME);
 		setTextureName(ExperimentalPhysics.MODID + ":enderPearlCore");
 		setMaxStackSize(1);
 		setMaxDamage(100);
-		GameRegistry.registerItem(this, name);
+		GameRegistry.registerItem(this, NAME);
 	}
 
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
@@ -34,7 +35,7 @@ public class ItemTensionSensor extends Item
             }
         }
 
-		world.playSoundAtEntity(player, "random.bow", 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
+		world.playSoundAtEntity(player, Sounds.BOW, 0.5F, 0.4F / (itemRand.nextFloat() * 0.4F + 0.8F));
 
 		
 		if (!world.isRemote)

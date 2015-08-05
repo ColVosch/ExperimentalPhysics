@@ -10,17 +10,17 @@ import net.minecraft.world.World;
 
 public class BlockInterdimensionalDisturber extends Block
 {
-	public static final String name = "blockInterdimensionalDisturber";
+	public static final String NAME = "blockInterdimensionalDisturber";
 	
 	
 	public BlockInterdimensionalDisturber()
 	{
 		super(Material.iron);
-		setBlockName(name);
+		setBlockName(NAME);
 		setStepSound(soundTypeMetal);
 		setHardness(18.0F);
 		setBlockTextureName(ExperimentalPhysics.MODID+":purifier");
-		GameRegistry.registerBlock(this, name);
+		GameRegistry.registerBlock(this, NAME);
 	}
 
 	@Override

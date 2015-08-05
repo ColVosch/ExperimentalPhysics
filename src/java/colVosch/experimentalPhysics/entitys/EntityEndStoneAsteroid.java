@@ -1,5 +1,6 @@
 package colVosch.experimentalPhysics.entitys;
 
+import colVosch.experimentalPhysics.reference.Particles;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
@@ -45,8 +46,8 @@ public class EntityEndStoneAsteroid extends Entity
 		} else {
 			for (int i = 0; i < 50; i ++) {
 				//worldObj.spawnParticle("portal", posX + 0.5F, posY + 0.5F, posZ + 0.5F, rand.nextDouble(), rand.nextDouble(), rand.nextDouble());
-				worldObj.spawnParticle("depthsuspend", posX + rand.nextDouble(), posY + rand.nextDouble(), posZ + rand.nextDouble(), rand.nextDouble(), rand.nextDouble(), rand.nextDouble());
-				worldObj.spawnParticle("smoke", posX + 0.5F, posY + 0.5F, posZ + 0.5F, rand.nextDouble(), rand.nextDouble(), rand.nextDouble());				
+				worldObj.spawnParticle(Particles.DEPTHSUSPEND, posX + rand.nextDouble(), posY + rand.nextDouble(), posZ + rand.nextDouble(), rand.nextDouble(), rand.nextDouble(), rand.nextDouble());
+				worldObj.spawnParticle(Particles.SMOKE, posX + 0.5F, posY + 0.5F, posZ + 0.5F, rand.nextDouble(), rand.nextDouble(), rand.nextDouble());				
 			}
 		}
 

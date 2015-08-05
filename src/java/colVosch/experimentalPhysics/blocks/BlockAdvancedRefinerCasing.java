@@ -8,14 +8,14 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 
 public class BlockAdvancedRefinerCasing extends BlockAdvancedRefinerPart
 {
-	private String name = "blockAdvancedRefinerCasing";
+	public static final String NAME = "blockAdvancedRefinerCasing";
 	
 	public BlockAdvancedRefinerCasing()
 	{
 		super();
-		setBlockName(name);
+		setBlockName(NAME);
 		setBlockTextureName(ExperimentalPhysics.MODID + ":advancedRefinerCasingFull");
-		GameRegistry.registerBlock(this, name);
+		GameRegistry.registerBlock(this, NAME);
 	}
 
 	@Override

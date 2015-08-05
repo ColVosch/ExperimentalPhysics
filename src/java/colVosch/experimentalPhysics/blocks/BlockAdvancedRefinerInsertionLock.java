@@ -15,14 +15,14 @@ import net.minecraft.world.World;
 public class BlockAdvancedRefinerInsertionLock extends BlockAdvancedRefinerPart implements ITileEntityProvider
 {
 
-	private static final String name = "blockAdvancedRefinerInsertionLock";
+	public static final String NAME = "blockAdvancedRefinerInsertionLock";
 
 	public BlockAdvancedRefinerInsertionLock()
 	{
 		super();
-		setBlockName(name);
+		setBlockName(NAME);
 		setBlockTextureName(ExperimentalPhysics.MODID + ":advancedRefinerInputTemp");
-		GameRegistry.registerBlock(this, name);
+		GameRegistry.registerBlock(this, NAME);
 		GameRegistry.registerTileEntity(TileEntityAdvancedRefinerInsertionLock.class, "tileEntityAdvancedRefinerInsertionLock");
 	}
 

@@ -10,6 +10,7 @@ import colVosch.experimentalPhysics.items.ModItems;
 import colVosch.experimentalPhysics.network.PacketController;
 import colVosch.experimentalPhysics.network.handlers.ISynchronizable;
 import colVosch.experimentalPhysics.network.packets.PacketSyncAdvancedRefiner;
+import colVosch.experimentalPhysics.reference.Localization;
 import colVosch.experimentalPhysics.util.Position;
 import net.minecraft.entity.Entity;
 import net.minecraft.init.Items;
@@ -176,7 +177,7 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 	@Override
 	public String getInventoryName()
 	{
-		return "container.refinerAdvanced";
+		return Localization.Container.REFINER_ADVANCED;
 	}
 	
 	

@@ -17,17 +17,17 @@ import net.minecraft.world.World;
 
 public class BlockRefiner extends BlockContainer 
 {
-	private String name = "blockRefiner";
+	private static final String NAME = "blockRefiner";
 	private IIcon[] icons = new IIcon[3];
 	
 	protected BlockRefiner()
 	{
 		super(Material.iron);
-		setBlockName(name);
+		setBlockName(NAME);
 		setStepSound(soundTypeMetal);
 		setHardness(18.0F);
 		setBlockTextureName(ExperimentalPhysics.MODID+":purifier");
-		GameRegistry.registerBlock(this, name);
+		GameRegistry.registerBlock(this, NAME);
 		GameRegistry.registerTileEntity(TileEntityRefiner.class, "tileEntityRefiner");
 	}
 	

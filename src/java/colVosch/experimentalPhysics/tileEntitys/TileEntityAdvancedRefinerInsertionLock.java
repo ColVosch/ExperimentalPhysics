@@ -1,5 +1,6 @@
 package colVosch.experimentalPhysics.tileEntitys;
 
+import colVosch.experimentalPhysics.reference.Localization;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -11,7 +12,7 @@ public class TileEntityAdvancedRefinerInsertionLock extends TileEntityStoring im
 	@Override
 	public String getInventoryName()
 	{
-		return "container.advancedRefinerInsertionLock";
+		return Localization.Container.ADVANCED_REFINER_INSERTION_LOCK;
 	}
 
 	@Override

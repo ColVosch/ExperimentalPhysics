@@ -4,6 +4,7 @@ import colVosch.experimentalPhysics.items.ModItems;
 import colVosch.experimentalPhysics.network.PacketController;
 import colVosch.experimentalPhysics.network.handlers.ISynchronizable;
 import colVosch.experimentalPhysics.network.packets.PacketSyncRefiner;
+import colVosch.experimentalPhysics.reference.Localization;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -50,7 +51,7 @@ public class TileEntityRefiner extends TileEntityStoring implements ISynchroniza
 	@Override
 	public String getInventoryName()
 	{	
-		return "container.refiner";
+		return Localization.Container.REFINER;
 	}
 
 	@Override
