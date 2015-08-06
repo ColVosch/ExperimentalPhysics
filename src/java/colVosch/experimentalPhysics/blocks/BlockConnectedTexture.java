@@ -15,6 +15,7 @@ import net.minecraft.world.IBlockAccess;
  * @author ColVosch
  * @see BlockConnectedTexture#icons
  */
+@Deprecated
 public abstract class BlockConnectedTexture extends Block
 {	
 	/**Array of the blocks icons. The index represents a sum of flags:<br>
@@ -107,6 +108,8 @@ public abstract class BlockConnectedTexture extends Block
 
 	private boolean isConnectionPossible(IBlockAccess access, int x, int y, int z, int xConnector, int yConnector, int zConnector)
 	{
-		return (access.getBlock(xConnector, yConnector, zConnector) instanceof BlockConnectedTexture) && ((BlockConnectedTexture) access.getBlock(xConnector, yConnector, zConnector)).canTextureConnect(access, new Position(x, y, z), new Position(xConnector, yConnector, zConnector));
+		return (access.getBlock(xConnector, yConnector, zConnector) instanceof BlockConnectedTexture) 
+				&& ((BlockConnectedTexture) access.getBlock(xConnector, yConnector, zConnector))
+				.canTextureConnect(access, new Position(x, y, z), new Position(xConnector, yConnector, zConnector));
 	}	
 }

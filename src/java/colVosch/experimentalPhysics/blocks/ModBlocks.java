@@ -9,6 +9,7 @@ import net.minecraft.creativetab.CreativeTabs;
 
 public final class ModBlocks
 {
+	public static Block testBlock = new TestBlock();
 	
 	public static Block refiner;
 	public static Block advancedRefiner;
