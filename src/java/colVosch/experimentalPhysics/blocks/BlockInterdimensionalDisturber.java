@@ -33,11 +33,4 @@ public class BlockInterdimensionalDisturber extends ModBlock
 			SpaceFieldManager.spaceFields.get(world.provider.dimensionId).removeTensionPoint(new Position(x, y, z));
 		}
     }
-
-	@Override
-	public String getBlockName()
-	{
-		return "blockInterdimensionalDisturber";
-	}
-
 }

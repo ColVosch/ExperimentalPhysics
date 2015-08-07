@@ -29,11 +29,6 @@ public abstract class ModBlock extends Block implements IConnectedTexture
 {
 	private IIcon[] icons = null;
 	
-	/**
-	 * @return The name of the block used for registration in the GameRegistry and for textures
-	 */
-	public abstract String getBlockName();
-	
 	/** Calls constructor of Block, sets block name and texture (according to the pattern MODID:blockname.0) and
 	 * registers it in the GameRegistry
 	 * @see net.minecraft.block.Block#Block(Material)
@@ -47,6 +42,16 @@ public abstract class ModBlock extends Block implements IConnectedTexture
 		GameRegistry.registerBlock(this, getBlockName());
 	}
 	
+	/** Returns the name of the block used for registration in the GameRegistry and for textures
+	 * @return The name of the block. If this is not overwritten, this name will be equal to the
+	 * 		name of the Class describing the Block (but with the first character in lower case
+	 */
+	public String getBlockName()
+	{
+		String name = this.getClass().getSimpleName();
+		return Character.toLowerCase(name.charAt(0)) + name.substring(1);
+	}
+
 	/** Defines standard connected texture behavior.
 	 * @see net.minecraft.block.Block#getIcon(net.minecraft.world.IBlockAccess, int, int, int, int)
 	 */

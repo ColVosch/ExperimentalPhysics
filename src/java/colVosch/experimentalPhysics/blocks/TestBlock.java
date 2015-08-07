@@ -22,12 +22,6 @@ public class TestBlock extends ModBlock
 		super.registerBlockIcons(iconRegister);
 		registerStandardConnectedTextureIcons(iconRegister);
 	}
-
-	@Override
-	public String getBlockName()
-	{
-		return "testBlock";
-	}
 	
 	@Override
 	public boolean canTextureConnect(IBlockAccess access, Position connectorPos, Position connecteePos)
