@@ -27,7 +27,7 @@ import net.minecraft.world.IBlockAccess;
  */
 public abstract class ModBlock extends Block implements IConnectedTexture
 {
-	private IIcon[] icons = new IIcon[16];
+	private IIcon[] icons = null;
 	
 	/**
 	 * @return The name of the block used for registration in the GameRegistry and for textures
@@ -54,7 +54,12 @@ public abstract class ModBlock extends Block implements IConnectedTexture
 	@SideOnly(Side.CLIENT)
 	public IIcon getIcon(IBlockAccess access, int x, int y, int z, int side)
 	{
-		return icons[ConnectedTextureHelper.getIconIndex(access, new Position(x, y, z), side)];
+		if (icons == null)
+		{
+			return this.blockIcon;
+		}
+		IIcon connTexIcon = icons[ConnectedTextureHelper.getIconIndex(access, new Position(x, y, z), side)];
+		return connTexIcon == null ? this.blockIcon : connTexIcon;
 	}
 	
 	/** This needs to be overwritten to activate connected texture behavior. 
@@ -78,6 +83,10 @@ public abstract class ModBlock extends Block implements IConnectedTexture
 	@SideOnly(Side.CLIENT)
 	protected void registerIcon(IIcon icon, byte index)
 	{
+		if (icons == null)
+		{
+			icons = new IIcon[16];
+		}
 		if (index >= 0 
 				&& index <= 16 
 				&& icon != null) {

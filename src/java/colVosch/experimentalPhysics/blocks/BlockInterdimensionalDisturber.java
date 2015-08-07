@@ -1,28 +1,21 @@
 package colVosch.experimentalPhysics.blocks;
 
-import colVosch.experimentalPhysics.ExperimentalPhysics;
 import colVosch.experimentalPhysics.spaceField.SpaceFieldManager;
 import colVosch.experimentalPhysics.util.Position;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 
-public class BlockInterdimensionalDisturber extends Block
+public class BlockInterdimensionalDisturber extends ModBlock
 {
-	public static final String NAME = "blockInterdimensionalDisturber";
 	
 	
 	public BlockInterdimensionalDisturber()
 	{
 		super(Material.iron);
-		setBlockName(NAME);
 		setStepSound(soundTypeMetal);
 		setHardness(18.0F);
-		setBlockTextureName(ExperimentalPhysics.MODID+":purifier");
-		GameRegistry.registerBlock(this, NAME);
 	}
-
+	
 	@Override
 	public void onPostBlockPlaced(World world, int x, int y, int z, int meta)
 	{
@@ -40,5 +33,11 @@ public class BlockInterdimensionalDisturber extends Block
 			SpaceFieldManager.spaceFields.get(world.provider.dimensionId).removeTensionPoint(new Position(x, y, z));
 		}
     }
+
+	@Override
+	public String getBlockName()
+	{
+		return "blockInterdimensionalDisturber";
+	}
 
 }
