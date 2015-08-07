@@ -2,35 +2,22 @@ package colVosch.experimentalPhysics.blocks;
 
 import java.util.Random;
 
-import colVosch.experimentalPhysics.constants.Tier;
+import colVosch.experimentalPhysics.constants.SubstanceProperty;
 import colVosch.experimentalPhysics.util.MultiblockHelper;
 import colVosch.experimentalPhysics.util.Position;
 import net.minecraft.block.material.Material;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public abstract class BlockAdvancedRefinerPart extends BlockConnectedTexture
+public abstract class BlockAdvancedRefinerPart extends PhysicsBlock
 {
-	/**
-	 * @return the tier of the refiner part.
-	 */
-	public abstract Tier getTier();
 	
-	
-	public BlockAdvancedRefinerPart()
+	public BlockAdvancedRefinerPart(SubstanceProperty substanceProperty)
 	{
-		super(Material.iron);
+		super(Material.iron, substanceProperty);
 		setStepSound(soundTypeMetal);
 		setHardness(25.0F);
-	}
-
-	@Override
-	public IIcon getIcon(int side, int meta)
-	{
-		return icons[0];
-	}
-	
+	}	
 
 	@Override
 	public boolean canTextureConnect(IBlockAccess access, Position thisPos, Position connectorPos)

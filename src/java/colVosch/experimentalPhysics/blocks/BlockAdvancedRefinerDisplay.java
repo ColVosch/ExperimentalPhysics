@@ -1,8 +1,7 @@
 package colVosch.experimentalPhysics.blocks;
 
 import colVosch.experimentalPhysics.ExperimentalPhysics;
-import colVosch.experimentalPhysics.constants.Tier;
-import colVosch.experimentalPhysics.constants.Tiers;
+import colVosch.experimentalPhysics.constants.SubstanceProperty;
 import colVosch.experimentalPhysics.tileEntitys.TileEntityAdvancedRefinerDisplay;
 import colVosch.experimentalPhysics.util.Position;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -15,29 +14,26 @@ import net.minecraft.world.World;
 public class BlockAdvancedRefinerDisplay extends BlockAdvancedRefinerPart implements ITileEntityProvider
 {
 
-	public static final String NAME = "blockAdvancedRefinerDisplay";
-
 	public BlockAdvancedRefinerDisplay()
 	{
-		setBlockName(NAME);
+		super(SubstanceProperty.IRON);
 		setBlockTextureName(ExperimentalPhysics.MODID + ":advancedRefinerDisplayFull");
-		GameRegistry.registerBlock(this, NAME);
 		GameRegistry.registerTileEntity(TileEntityAdvancedRefinerDisplay.class, TileEntityAdvancedRefinerDisplay.NAME);
 	}
 	
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister)
 	{
-		icons[3] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayUpLeft");
-		icons[7] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayUp");
-		icons[6] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayUpRight");
-		icons[11] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayLeft");
-		icons[15] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayMiddle");
-		icons[14] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayRight");
-		icons[9] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayDownLeft");
-		icons[13] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayDown");
-		icons[12] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayDownRight");	
-		icons[0] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayFull");
+//		icons[3] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayUpLeft");
+//		icons[7] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayUp");
+//		icons[6] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayUpRight");
+//		icons[11] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayLeft");
+//		icons[15] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayMiddle");
+//		icons[14] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayRight");
+//		icons[9] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayDownLeft");
+//		icons[13] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayDown");
+//		icons[12] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayDownRight");	
+//		icons[0] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayFull");
 	}
 	
 	@Override
@@ -45,12 +41,7 @@ public class BlockAdvancedRefinerDisplay extends BlockAdvancedRefinerPart implem
 	{
 		return new TileEntityAdvancedRefinerDisplay();
 	}
-
-	@Override
-	public Tier getTier()
-	{
-		return Tiers.tierIron;
-	}
+	
 	
 	@Override
 	public void form(World world, int x, int y, int z, int xCore, int yCore, int zCore)

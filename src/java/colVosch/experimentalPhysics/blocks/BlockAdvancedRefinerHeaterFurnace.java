@@ -3,8 +3,7 @@ package colVosch.experimentalPhysics.blocks;
 import java.util.Random;
 
 import colVosch.experimentalPhysics.ExperimentalPhysics;
-import colVosch.experimentalPhysics.constants.Tier;
-import colVosch.experimentalPhysics.constants.Tiers;
+import colVosch.experimentalPhysics.constants.SubstanceProperty;
 import colVosch.experimentalPhysics.guis.GuiHandler;
 import colVosch.experimentalPhysics.reference.Particles;
 import colVosch.experimentalPhysics.tileEntitys.TileEntityAdvancedRefinerHeaterFurnace;
@@ -19,15 +18,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 public class BlockAdvancedRefinerHeaterFurnace extends BlockAdvancedRefinerPart implements ITileEntityProvider
-{		
-	public static final String NAME = "blockAdvancedRefinerHeaterFurnace";
+{	
 
 	public BlockAdvancedRefinerHeaterFurnace()
 	{
-		super();
-		setBlockName(NAME);
+		super(SubstanceProperty.IRON);
 		setBlockTextureName(ExperimentalPhysics.MODID + ":advancedRefinerHeaterFurnaceFull");
-		GameRegistry.registerBlock(this, NAME);
 		GameRegistry.registerTileEntity(TileEntityAdvancedRefinerHeaterFurnace.class, TileEntityAdvancedRefinerHeaterFurnace.NAME);
 	}
 	
@@ -36,17 +32,11 @@ public class BlockAdvancedRefinerHeaterFurnace extends BlockAdvancedRefinerPart 
 	{
 		return new TileEntityAdvancedRefinerHeaterFurnace();
 	}
-
-	@Override
-	public Tier getTier()
-	{
-		return Tiers.tierIron;
-	}
 	
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister)
 	{
-		icons[0] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerHeaterFurnaceFull");
+//		icons[0] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerHeaterFurnaceFull");
 		
 //		icons[3] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayUpLeft");
 //		icons[7] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerDisplayUp");

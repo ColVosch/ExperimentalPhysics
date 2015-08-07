@@ -123,7 +123,14 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 	
 	public void recalculateConstants()
 	{
-		coolOffConstant = ((float) ExpPhysConfig.getCoolDownFactor()) * ((float) ((((BlockAdvancedRefiner) getPosition().getBlock(worldObj)).getAverageThermalConstant(worldObj, xCoord, yCoord, zCoord))) / ((float) ((BlockAdvancedRefiner) getPosition().getBlock(worldObj)).getMass(worldObj, xCoord, yCoord, zCoord)) * ((float) Math.sqrt(14f/Math.PI)));
+		coolOffConstant = ((float) ExpPhysConfig.getCoolDownFactor()) 
+				* ((float) ((((BlockAdvancedRefiner) getPosition()
+						.getBlock(worldObj))
+						.getAverageThermalConstant(worldObj, xCoord, yCoord, zCoord)))
+				/ ((float) ((BlockAdvancedRefiner) getPosition().
+						getBlock(worldObj)).
+						getMass(worldObj, xCoord, yCoord, zCoord)) 
+				* ((float) Math.sqrt(14f/Math.PI)));
 		maxHeat = ((BlockAdvancedRefiner) getPosition().getBlock(worldObj)).getMaxStructureHeat(worldObj, xCoord, yCoord, zCoord);
 	}
 	

@@ -2,7 +2,6 @@ package colVosch.experimentalPhysics;
 
 import colVosch.experimentalPhysics.blocks.ModBlocks;
 import colVosch.experimentalPhysics.constants.ExpPhysConfig;
-import colVosch.experimentalPhysics.constants.Tiers;
 import colVosch.experimentalPhysics.entitys.EntityEndStoneAsteroid;
 import colVosch.experimentalPhysics.guis.GuiHandler;
 import colVosch.experimentalPhysics.items.ModItems;
@@ -42,7 +41,6 @@ import net.minecraftforge.common.MinecraftForge;
         	registerEventHandlers();
         	
         	ExpPhysConfig.init(event.getSuggestedConfigurationFile());
-        	Tiers.register();
         	
         	ModBlocks.register();
         	ModItems.register();

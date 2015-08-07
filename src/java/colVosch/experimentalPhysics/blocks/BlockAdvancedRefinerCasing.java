@@ -1,41 +1,30 @@
 package colVosch.experimentalPhysics.blocks;
 
 import colVosch.experimentalPhysics.ExperimentalPhysics;
-import colVosch.experimentalPhysics.constants.Tier;
-import colVosch.experimentalPhysics.constants.Tiers;
-import cpw.mods.fml.common.registry.GameRegistry;
+import colVosch.experimentalPhysics.constants.SubstanceProperty;
 import net.minecraft.client.renderer.texture.IIconRegister;
 
 public class BlockAdvancedRefinerCasing extends BlockAdvancedRefinerPart
 {
-	public static final String NAME = "blockAdvancedRefinerCasing";
 	
 	public BlockAdvancedRefinerCasing()
 	{
-		super();
-		setBlockName(NAME);
+		super(SubstanceProperty.IRON);
 		setBlockTextureName(ExperimentalPhysics.MODID + ":advancedRefinerCasingFull");
-		GameRegistry.registerBlock(this, NAME);
 	}
 
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister)
 	{
-		icons[3] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingUpLeft");
-		icons[7] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingUp");
-		icons[6] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingUpRight");
-		icons[11] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingLeft");
-		icons[15] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingMiddle");
-		icons[14] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingRight");
-		icons[9] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingDownLeft");
-		icons[13] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingDown");
-		icons[12] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingDownRight");	
-		icons[0] =  iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingFull");
-	}
-
-	@Override
-	public Tier getTier() 
-	{
-		return Tiers.tierIron;
+		registerIcon(iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingUpLeft"	), (byte) 3);
+		registerIcon(iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingUp"		), (byte) 7);
+		registerIcon(iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingUpRight"	), (byte) 6);
+		registerIcon(iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingLeft"		), (byte) 11);
+		registerIcon(iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingMiddle"	), (byte) 15);
+		registerIcon(iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingRight"	), (byte) 14);
+		registerIcon(iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingDownLeft"	), (byte) 9);
+		registerIcon(iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingDown"		), (byte) 13);
+		registerIcon(iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingDownRight"), (byte) 12);	
+		registerIcon(iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerCasingFull"		), (byte) 0);
 	}
 }

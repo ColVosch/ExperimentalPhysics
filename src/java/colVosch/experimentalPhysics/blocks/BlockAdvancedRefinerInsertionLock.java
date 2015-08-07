@@ -1,13 +1,11 @@
 package colVosch.experimentalPhysics.blocks;
 
 import colVosch.experimentalPhysics.ExperimentalPhysics;
-import colVosch.experimentalPhysics.constants.Tier;
-import colVosch.experimentalPhysics.constants.Tiers;
+import colVosch.experimentalPhysics.constants.SubstanceProperty;
 import colVosch.experimentalPhysics.tileEntitys.TileEntityAdvancedRefinerInsertionLock;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -19,18 +17,16 @@ public class BlockAdvancedRefinerInsertionLock extends BlockAdvancedRefinerPart 
 
 	public BlockAdvancedRefinerInsertionLock()
 	{
-		super();
-		setBlockName(NAME);
+		super(SubstanceProperty.IRON);
 		setBlockTextureName(ExperimentalPhysics.MODID + ":advancedRefinerInputTemp");
-		GameRegistry.registerBlock(this, NAME);
 		GameRegistry.registerTileEntity(TileEntityAdvancedRefinerInsertionLock.class, "tileEntityAdvancedRefinerInsertionLock");
 	}
 
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		icons[0] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerInputTemp");
-	}
+//	@Override
+//	public void registerBlockIcons(IIconRegister iconRegister)
+//	{
+//		icons[0] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":advancedRefinerInputTemp");
+//	}
 	
 	@Override
 	public TileEntity createNewTileEntity(World p_149915_1_, int p_149915_2_)
@@ -59,10 +55,4 @@ public class BlockAdvancedRefinerInsertionLock extends BlockAdvancedRefinerPart 
 		((TileEntityAdvancedRefinerInsertionLock) world.getTileEntity(x, y, z)).dropItems();
 		super.breakBlock(world, x, y, z, block, meta);
     }
-
-	@Override
-	public Tier getTier()
-	{
-		return Tiers.tierIron;
-	}
 }

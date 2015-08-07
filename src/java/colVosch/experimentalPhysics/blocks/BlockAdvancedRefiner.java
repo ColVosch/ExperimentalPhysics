@@ -2,10 +2,7 @@ package colVosch.experimentalPhysics.blocks;
 
 import java.util.List;
 
-import colVosch.experimentalPhysics.ExperimentalPhysics;
-import colVosch.experimentalPhysics.constants.Tier;
-import colVosch.experimentalPhysics.constants.Tiers;
-import colVosch.experimentalPhysics.items.ItemBlockAdvancedRefiner;
+import colVosch.experimentalPhysics.constants.SubstanceProperty;
 import colVosch.experimentalPhysics.network.PacketController;
 import colVosch.experimentalPhysics.network.handlers.HandlerCoords;
 import colVosch.experimentalPhysics.network.packets.PacketCoords;
@@ -16,7 +13,6 @@ import colVosch.experimentalPhysics.util.Position;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
@@ -28,17 +24,8 @@ public class BlockAdvancedRefiner extends BlockAdvancedRefinerPart implements IT
 	
 	public BlockAdvancedRefiner()
 	{
-		super();
-		setBlockName(NAME);
-		setBlockTextureName(ExperimentalPhysics.MODID + ":refinerAdvanced");
-		GameRegistry.registerBlock(this, ItemBlockAdvancedRefiner.class, NAME);
+		super(SubstanceProperty.IRON);
 		GameRegistry.registerTileEntity(TileEntityAdvancedRefiner.class, TileEntityAdvancedRefiner.NAME);
-	}
-
-	@Override
-	public void registerBlockIcons(IIconRegister iconRegister)
-	{
-		icons[0] = iconRegister.registerIcon(ExperimentalPhysics.MODID + ":refinerAdvanced");
 	}
 	
 	@Override
@@ -69,7 +56,7 @@ public class BlockAdvancedRefiner extends BlockAdvancedRefinerPart implements IT
 		List<Position> surroundingBlocks = MultiblockHelper.getCube(x, y, z, 1);
 		for (Position block : surroundingBlocks)
 		{
-			canForm = (block.getBlock(world) instanceof BlockConnectedTexture && (block.getMeta(world) == 0));
+			canForm = (block.getBlock(world) instanceof BlockAdvancedRefinerPart && (block.getMeta(world) == 0));
 			if (!canForm)
 			{
 				return false;
@@ -137,19 +124,14 @@ public class BlockAdvancedRefiner extends BlockAdvancedRefinerPart implements IT
 		super.breakBlock(world, x, y, z, block, meta);
     }
 
-	
-	@Override
-	public Tier getTier()
-	{
-		return Tiers.tierIron;
-	}
-
 	public float getAverageThermalConstant(World world, int x, int y, int z)
 	{
 		float sum = 0f;
 		for (Position p : MultiblockHelper.getCube(x, y, z, 1))
 		{
-			sum += p.getBlock(world) instanceof BlockAdvancedRefinerPart ? ((BlockAdvancedRefinerPart) p.getBlock(world)).getTier().getThermalConstant() : 1;
+			sum += p.getBlock(world) instanceof BlockAdvancedRefinerPart 
+					? ((BlockAdvancedRefinerPart) p.getBlock(world)).getSubstancePropperty().getThermConstant() 
+					: 1;
 		}
 		return sum / 27f;
 	}
@@ -159,7 +141,9 @@ public class BlockAdvancedRefiner extends BlockAdvancedRefinerPart implements IT
 		int sum = 0;
 		for (Position p : MultiblockHelper.getCube(x, y, z, 1))
 		{
-			sum += p.getBlock(world) instanceof BlockAdvancedRefinerPart ? ((BlockAdvancedRefinerPart) p.getBlock(world)).getTier().getMassPerBlock() : 0;
+			sum += p.getBlock(world) instanceof BlockAdvancedRefinerPart 
+					? ((BlockAdvancedRefinerPart) p.getBlock(world)).getSubstancePropperty().getMassPerBlock() 
+					: 0;
 		}
 		return sum;
 	}
@@ -172,7 +156,7 @@ public class BlockAdvancedRefiner extends BlockAdvancedRefinerPart implements IT
 			Block block = pos.getBlock(world);
 			if (block instanceof BlockAdvancedRefinerPart)
 			{
-				maxHeat = (short) Math.max(maxHeat, ((BlockAdvancedRefinerPart) block).getTier().getMaxHeat());
+				maxHeat = (short) Math.max(maxHeat, ((BlockAdvancedRefinerPart) block).getSubstancePropperty().getMaxHeat());
 			}
 		}
 		return maxHeat;
