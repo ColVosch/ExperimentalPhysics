@@ -3,12 +3,10 @@ package colVosch.experimentalPhysics.constants;
 public class SubstanceProperty
 {
 	public static final SubstanceProperty IRON = new SubstanceProperty()
-			.setMaxHeat(ExpPhysConfig.getLimitHeatTierIron())
-			.setThermConstant(ExpPhysConfig.getThermConstantTierIron())
-			.setMassPerBlock(PhysicConstants.IRON_MASS_PER_BLOCK);
+			.setMaxHeat(ExpPhysConfig.getMaxHeatIron())
+			.setCoolDownConstant(ExpPhysConfig.getCoolDownConstantIron());
 	private int maxHeat;
-	private float thermConstant;
-	private int massPerBlock;
+	private float coolDownConstant;
 
 	public int getMaxHeat()
 	{
@@ -21,26 +19,14 @@ public class SubstanceProperty
 		return this;
 	}
 
-	public float getThermConstant()
+	public float getCoolDownConstant()
 	{
-		return thermConstant;
-	}
-
-	public SubstanceProperty setThermConstant(float thermConstant)
-	{
-		this.thermConstant = thermConstant;
-		return this;
-	}
-
-	public int getMassPerBlock()
-	{
-		return massPerBlock;
-	}
-
-	public SubstanceProperty setMassPerBlock(int massPerBlock)
-	{
-		this.massPerBlock = massPerBlock;
-		return this;
+		return this.coolDownConstant;
 	}
 	
+	public SubstanceProperty setCoolDownConstant(float coolDownConstant)
+	{
+		this.coolDownConstant = coolDownConstant;
+		return this;
+	}
 }

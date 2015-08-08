@@ -22,14 +22,9 @@ public abstract class PhysicsBlock extends ModBlock
 	{
 		return substanceProperty.getMaxHeat();
 	}
-
-	public float getThermalConstant()
+	
+	public float getCoolDownConstant()
 	{
-		return substanceProperty.getThermConstant();
-	}
-
-	public int getMassPerBlock()
-	{
-		return substanceProperty.getMassPerBlock();
+		return substanceProperty.getCoolDownConstant();
 	}
 }

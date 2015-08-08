@@ -31,8 +31,8 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 	private boolean formed = false;
 	private short progress = -1;
 	private short refiningSpeed = 1;
-	private float temperature = 20;
-	private float coolOffConstant = VALUE_NOT_DEFINED;
+	private float temperature = 20.0f;
+	private float coolDownFactor = VALUE_NOT_DEFINED;
 	private int roomTemp = VALUE_NOT_DEFINED;
 	private short maxHeat = 500;
 	private float dustChance = 0f;
@@ -123,14 +123,12 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 	
 	public void recalculateConstants()
 	{
-		coolOffConstant = ((float) ExpPhysConfig.getCoolDownFactor()) 
-				* ((float) ((((BlockAdvancedRefiner) getPosition()
-						.getBlock(worldObj))
-						.getAverageThermalConstant(worldObj, xCoord, yCoord, zCoord)))
-				/ ((float) ((BlockAdvancedRefiner) getPosition().
-						getBlock(worldObj)).
-						getMass(worldObj, xCoord, yCoord, zCoord)) 
-				* ((float) Math.sqrt(14f/Math.PI)));
+		float materialCoolDown = ((BlockAdvancedRefiner) getPosition().getBlock(worldObj))
+									.getAverageCoolDownConstant(worldObj, xCoord, yCoord, zCoord);
+		float globalCoolDown = ExpPhysConfig.getCoolDownFactor();
+		coolDownFactor = materialCoolDown * globalCoolDown;
+		coolDownFactor = coolDownFactor >= 1 ? 0.02f : coolDownFactor;
+		
 		maxHeat = ((BlockAdvancedRefiner) getPosition().getBlock(worldObj)).getMaxStructureHeat(worldObj, xCoord, yCoord, zCoord);
 	}
 	
@@ -249,7 +247,7 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 	@Override
 	public void updateEntity()
 	{
-		coolOff();
+		coolDown();
 		if (formed)
 		{
 			increaseHeat();
@@ -285,9 +283,9 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 		worldObj.createExplosion((Entity) null, xCoord + 0.5f, yCoord + 0.5f, zCoord + 0.5f, 26, true);
 	}
 
-	private void coolOff()
+	private void coolDown()
 	{	
-		temperature -= getCoolOffConstant() * (temperature - getRoomTemp());
+		temperature -= getCoolDownFactor() * (temperature - getRoomTemp());
 	}
 
 	private void increaseHeat()
@@ -311,13 +309,13 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 	 * times the square root of (14 divided by pi) times 20...<br>
 	 * Because science!
 	 */
-	public float getCoolOffConstant()
+	public float getCoolDownFactor()
 	{
-		if (coolOffConstant == VALUE_NOT_DEFINED)
+		if (coolDownFactor == VALUE_NOT_DEFINED)
 		{
 			recalculateConstants();
 		}
-		return coolOffConstant;
+		return coolDownFactor;
 	}
 	
 	/**
@@ -466,6 +464,7 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 
 	public float getHeat()
 	{
+		System.out.println(temperature);
 		return temperature;
 	}
 
