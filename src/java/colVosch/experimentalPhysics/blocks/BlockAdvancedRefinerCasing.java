@@ -1,7 +1,7 @@
 package colVosch.experimentalPhysics.blocks;
 
 import colVosch.experimentalPhysics.ExperimentalPhysics;
-import colVosch.experimentalPhysics.constants.SubstanceProperty;
+import colVosch.experimentalPhysics.settings.SubstanceProperty;
 import net.minecraft.client.renderer.texture.IIconRegister;
 
 public class BlockAdvancedRefinerCasing extends BlockAdvancedRefinerPart

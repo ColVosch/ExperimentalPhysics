@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
-import colVosch.experimentalPhysics.constants.ExpPhysConfig;
+import colVosch.experimentalPhysics.settings.Settings;
 import colVosch.experimentalPhysics.spaceField.events.SpaceFieldEvents;
 import colVosch.experimentalPhysics.util.Position;
 import net.minecraft.entity.player.EntityPlayer;
@@ -71,7 +71,7 @@ public class SpaceField
 	public void tryTriggerSpaceFieldEvent()
 	{
 		tickCounter ++;
-		tickCounter %= ExpPhysConfig.getSpaceEventFrequency();
+		tickCounter %= Settings.getSpaceEventFrequency();
 		
 		if (tickCounter != 0) {
 			return;
@@ -109,7 +109,7 @@ public class SpaceField
 		float strength = 0;
 		for (TensionPoint tensionPoint : tensionPoints) {
 			dist = pos.getDistance(tensionPoint);
-			strength += (tensionPoint.strength / (Math.pow(dist, 2d) / ExpPhysConfig.getSpaceTensionRangeAmplifier() + 1));
+			strength += (tensionPoint.strength / (Math.pow(dist, 2d) / Settings.getSpaceTensionRangeAmplifier() + 1));
 		}
 		return strength;
 	}

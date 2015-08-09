@@ -3,9 +3,9 @@ package colVosch.experimentalPhysics.blocks;
 import java.util.Random;
 
 import colVosch.experimentalPhysics.ExperimentalPhysics;
-import colVosch.experimentalPhysics.constants.SubstanceProperty;
 import colVosch.experimentalPhysics.guis.GuiHandler;
 import colVosch.experimentalPhysics.reference.Particles;
+import colVosch.experimentalPhysics.settings.SubstanceProperty;
 import colVosch.experimentalPhysics.tileEntitys.TileEntityAdvancedRefinerHeaterFurnace;
 import colVosch.experimentalPhysics.tileEntitys.TileEntityStoring;
 import colVosch.experimentalPhysics.util.Position;

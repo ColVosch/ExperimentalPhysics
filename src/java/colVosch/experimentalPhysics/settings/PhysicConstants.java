@@ -1,4 +1,4 @@
-package colVosch.experimentalPhysics.constants;
+package colVosch.experimentalPhysics.settings;
 
 public class PhysicConstants
 {

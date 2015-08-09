@@ -2,7 +2,7 @@ package colVosch.experimentalPhysics.blocks;
 
 import java.util.Random;
 
-import colVosch.experimentalPhysics.constants.SubstanceProperty;
+import colVosch.experimentalPhysics.settings.SubstanceProperty;
 import colVosch.experimentalPhysics.util.MultiblockHelper;
 import colVosch.experimentalPhysics.util.Position;
 import net.minecraft.block.material.Material;

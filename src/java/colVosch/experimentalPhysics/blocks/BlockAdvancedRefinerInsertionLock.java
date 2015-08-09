@@ -1,7 +1,7 @@
 package colVosch.experimentalPhysics.blocks;
 
 import colVosch.experimentalPhysics.ExperimentalPhysics;
-import colVosch.experimentalPhysics.constants.SubstanceProperty;
+import colVosch.experimentalPhysics.settings.SubstanceProperty;
 import colVosch.experimentalPhysics.tileEntitys.TileEntityAdvancedRefinerInsertionLock;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;

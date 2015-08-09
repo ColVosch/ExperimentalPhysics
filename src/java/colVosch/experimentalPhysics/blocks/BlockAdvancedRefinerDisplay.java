@@ -1,7 +1,7 @@
 package colVosch.experimentalPhysics.blocks;
 
 import colVosch.experimentalPhysics.ExperimentalPhysics;
-import colVosch.experimentalPhysics.constants.SubstanceProperty;
+import colVosch.experimentalPhysics.settings.SubstanceProperty;
 import colVosch.experimentalPhysics.tileEntitys.TileEntityAdvancedRefinerDisplay;
 import colVosch.experimentalPhysics.util.Position;
 import cpw.mods.fml.common.registry.GameRegistry;

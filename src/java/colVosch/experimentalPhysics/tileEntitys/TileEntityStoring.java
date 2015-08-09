@@ -17,7 +17,7 @@ public abstract class TileEntityStoring extends TileEntityBasic implements IInve
 {
 	protected ItemStack[] inventory;
 	
-	/**Initialize an itemStack array called inventory here. 
+	/**Initialize an ItemStack array called inventory here. 
 	 */
 	protected abstract void initInvenory();
 	

@@ -1,6 +1,6 @@
 package colVosch.experimentalPhysics.blocks;
 
-import colVosch.experimentalPhysics.constants.SubstanceProperty;
+import colVosch.experimentalPhysics.settings.SubstanceProperty;
 import net.minecraft.block.material.Material;
 
 public abstract class PhysicsBlock extends ModBlock
@@ -22,14 +22,9 @@ public abstract class PhysicsBlock extends ModBlock
 	{
 		return substanceProperty.getMaxHeat();
 	}
-
-	public float getThermalConstant()
+	
+	public float getCoolDownConstant()
 	{
-		return substanceProperty.getThermConstant();
-	}
-
-	public int getMassPerBlock()
-	{
-		return substanceProperty.getMassPerBlock();
+		return substanceProperty.getCoolDownConstant();
 	}
 }

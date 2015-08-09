@@ -2,10 +2,10 @@ package colVosch.experimentalPhysics.blocks;
 
 import java.util.List;
 
-import colVosch.experimentalPhysics.constants.SubstanceProperty;
 import colVosch.experimentalPhysics.network.PacketController;
 import colVosch.experimentalPhysics.network.handlers.HandlerCoords;
 import colVosch.experimentalPhysics.network.packets.PacketCoords;
+import colVosch.experimentalPhysics.settings.SubstanceProperty;
 import colVosch.experimentalPhysics.tileEntitys.TileEntityAdvancedRefiner;
 import colVosch.experimentalPhysics.tileEntitys.TileEntityStoring;
 import colVosch.experimentalPhysics.util.MultiblockHelper;
@@ -43,7 +43,7 @@ public class BlockAdvancedRefiner extends BlockAdvancedRefinerPart implements IT
 	
 	public void casingAdded(World world, int x, int y, int z)
 	{
-		((TileEntityAdvancedRefiner) world.getTileEntity(x, y, z)).recalculateConstants();
+		((TileEntityAdvancedRefiner) world.getTileEntity(x, y, z)).recalculateStructureProppertys();
 		if (canForm(world, x, y, z))
 		{
 			formStructure(world, x, y, z);
@@ -91,7 +91,7 @@ public class BlockAdvancedRefiner extends BlockAdvancedRefinerPart implements IT
 	
 	public void casingRemoved(World world, int x, int y, int z)
 	{
-		((TileEntityAdvancedRefiner) world.getTileEntity(x, y, z)).recalculateConstants();
+		((TileEntityAdvancedRefiner) world.getTileEntity(x, y, z)).recalculateStructureProppertys();
 		unFormStructure(world, x, y, z);
 	}
 
@@ -124,29 +124,29 @@ public class BlockAdvancedRefiner extends BlockAdvancedRefinerPart implements IT
 		super.breakBlock(world, x, y, z, block, meta);
     }
 
-	public float getAverageThermalConstant(World world, int x, int y, int z)
-	{
-		float sum = 0f;
-		for (Position p : MultiblockHelper.getCube(x, y, z, 1))
-		{
-			sum += p.getBlock(world) instanceof BlockAdvancedRefinerPart 
-					? ((BlockAdvancedRefinerPart) p.getBlock(world)).getSubstancePropperty().getThermConstant() 
-					: 1;
-		}
-		return sum / 27f;
-	}
+//	public float getAverageThermalConstant(World world, int x, int y, int z)
+//	{
+//		float sum = 0f;
+//		for (Position p : MultiblockHelper.getCube(x, y, z, 1))
+//		{
+//			sum += p.getBlock(world) instanceof BlockAdvancedRefinerPart 
+//					? ((BlockAdvancedRefinerPart) p.getBlock(world)).getSubstancePropperty().getThermConstant() 
+//					: 1;
+//		}
+//		return sum / 27f;
+//	}
 	
-	public int getMass(World world, int x, int y, int z)
-	{
-		int sum = 0;
-		for (Position p : MultiblockHelper.getCube(x, y, z, 1))
-		{
-			sum += p.getBlock(world) instanceof BlockAdvancedRefinerPart 
-					? ((BlockAdvancedRefinerPart) p.getBlock(world)).getSubstancePropperty().getMassPerBlock() 
-					: 0;
-		}
-		return sum;
-	}
+//	public int getMass(World world, int x, int y, int z)
+//	{
+//		int sum = 0;
+//		for (Position p : MultiblockHelper.getCube(x, y, z, 1))
+//		{
+//			sum += p.getBlock(world) instanceof BlockAdvancedRefinerPart 
+//					? ((BlockAdvancedRefinerPart) p.getBlock(world)).getSubstancePropperty().getMassPerBlock() 
+//					: 0;
+//		}
+//		return sum;
+//	}
 
 	public short getMaxStructureHeat(World world, int xCoord, int yCoord, int zCoord)
 	{
@@ -160,6 +160,18 @@ public class BlockAdvancedRefiner extends BlockAdvancedRefinerPart implements IT
 			}
 		}
 		return maxHeat;
+	}
+
+	public float getAverageCoolDownConstant(World world, int x, int y, int z)
+	{
+		float sum = 0f;
+		for (Position p : MultiblockHelper.getCube(x, y, z, 1))
+		{
+			sum += p.getBlock(world) instanceof BlockAdvancedRefinerPart 
+					? ((BlockAdvancedRefinerPart) p.getBlock(world)).getCoolDownConstant() 
+					: 1;
+		}
+		return sum / 27f;
 	}
 
 }
