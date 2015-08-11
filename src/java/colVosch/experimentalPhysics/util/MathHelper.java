@@ -4,6 +4,11 @@ public class MathHelper
 {
 	public static int boolArrayToInt(boolean[] bits)
 	{
+		if (bits == null)
+			throw new IllegalArgumentException("The argument can not be null");
+		if (bits.length > 32)
+			throw new IllegalArgumentException("The passed array can have only as many bytes as an integer");
+
 		int result = 0;
 		for (int e = 0; e < bits.length; e++)
 		{
@@ -20,8 +25,8 @@ public class MathHelper
 	 * @param a
 	 * @param b
 	 */
-	public static int diff(int a, int b)
+	public static long diff(int a, int b)
 	{	
-		return Math.abs(a - b);
+		return Math.abs((long)a - (long)b);
 	}
 }
