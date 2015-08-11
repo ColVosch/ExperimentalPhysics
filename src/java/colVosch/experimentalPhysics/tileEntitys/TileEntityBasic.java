@@ -6,7 +6,7 @@ import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityBasic extends TileEntity
+public abstract class TileEntityBasic extends TileEntity
 {
 	@Override
     public S35PacketUpdateTileEntity getDescriptionPacket() 

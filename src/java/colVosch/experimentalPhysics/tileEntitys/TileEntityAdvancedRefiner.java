@@ -19,6 +19,7 @@ import net.minecraft.tileentity.TileEntity;
 
 public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISynchronizable<PacketSyncAdvancedRefiner>
 {
+	
 	public static final int REQUIRED_PROGRESS = 10000;
 	public static final String NAME = "tileEntityAdvancedRefiner";
 	
@@ -34,7 +35,9 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 	private float coolDownFactor = VALUE_NOT_DEFINED;
 	private int roomTemp = VALUE_NOT_DEFINED;
 	private short maxHeat = 500;
-	private float dustChance = 0f;
+	private float dustChance = 0.0f;
+	
+	// TODO Server starting event!
 	private List<IMultiblockInput> inputs = new ArrayList<IMultiblockInput>();
 	private List<Position> inputPositions = new ArrayList<Position>();
 	private List<IMultiblockOutput> outputs = new ArrayList<IMultiblockOutput>();
@@ -42,13 +45,11 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 	private List<IAdvancedRefinerModifier> modifiers = new ArrayList<IAdvancedRefinerModifier>();
 	private List<Position> modifierPositions = new ArrayList<Position>();
 	private List<IAdvancedRefinerHeater> heaters = new ArrayList<IAdvancedRefinerHeater>();
-	private List<Position> heaterPositions = new ArrayList<Position>();
+	private List<Position> heaterPositions = new ArrayList<Position>();	
 
-	
-	@Override
-	protected void initInvenory()
+	public TileEntityAdvancedRefiner()
 	{
-		inventory = new ItemStack[3];
+		super(3);		// This TileEntity will have 3 slots: input_primary, input_secondary and output
 	}
 	
 	@Override
@@ -245,32 +246,36 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 	public void updateEntity()
 	{
 		coolDown();
-		if (formed)
+		if (formed)							// True if the structure is active
 		{
 			increaseHeat();
-			if (temperature > maxHeat)
+			if (temperature > maxHeat)		// The temperature has breached the limit, action should be taken
 			{
 				overheat();
 			}
-			if (progress == -1)
+			if (progress == -1)				// True if the structure is waiting for the right conditions to start 
 			{
 				if (canStartRefining())
 				{
 					progress = 0;
 				}
 			}
-			if (progress >= 0 && progress < REQUIRED_PROGRESS)
+			if (progress >= 0 && progress < REQUIRED_PROGRESS)		// True if the structure is currently working
 			{
 				progress += (int) (1f + ((float) refiningSpeed * temperature / 100));
 			}
-			if (progress >= REQUIRED_PROGRESS)
+			if (progress >= REQUIRED_PROGRESS)						// True if the structure has finished working
 			{
-				if (!worldObj.isRemote)
+				if (!worldObj.isRemote)		// On the server side, update the clients
 				{
-					PacketController.getNetworkWrapper().sendToAll(new PacketSyncAdvancedRefiner(xCoord, yCoord, zCoord, formed, progress, refiningSpeed, temperature, maxHeat, dustChance));
+					PacketController
+						.getNetworkWrapper()
+						.sendToAll(
+								new PacketSyncAdvancedRefiner(xCoord, yCoord, zCoord, 
+										formed, progress, refiningSpeed, temperature, maxHeat, dustChance));
 				}
 				process();
-				progress = -1;
+				progress = -1;				// Go back into waiting mode again
 			}
 		}	
 	}
@@ -301,10 +306,7 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 	}
 	
 	/**
-	 * @return the average thermal conductivity of the structure times 54 divided by
-	 * the mass of the structure times the average thermal capacity of the structure
-	 * times the square root of (14 divided by pi) times 20...<br>
-	 * Because science!
+	 * @return The coolDownFactor. Will be calculated if it has not been yet
 	 */
 	public float getCoolDownFactor()
 	{
@@ -335,7 +337,12 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 		{
 			inputItem();
 		}
-		return inventory[INPUT] != null && formed && (inventory[OUTPUT_PRIMARY] == null || inventory[OUTPUT_PRIMARY].stackSize < inventory[OUTPUT_PRIMARY].getMaxStackSize()) && (inventory[OUTPUT_SECONDARY] == null || inventory[OUTPUT_SECONDARY].stackSize < inventory[OUTPUT_SECONDARY].getMaxStackSize()) && temperature <= getMaxHeat();
+		return inventory[INPUT] != null && formed 
+				&& (inventory[OUTPUT_PRIMARY] == null 
+						|| inventory[OUTPUT_PRIMARY].stackSize < inventory[OUTPUT_PRIMARY].getMaxStackSize()) 
+				&& (inventory[OUTPUT_SECONDARY] == null 
+						|| inventory[OUTPUT_SECONDARY].stackSize < inventory[OUTPUT_SECONDARY].getMaxStackSize()) 
+				&& temperature <= getMaxHeat();			// TODO questionable?
 	}
 	
 	private float getMaxHeat()
@@ -424,7 +431,7 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 	
 	private boolean outputItem(ItemStack outputStack)
 	{
-		if (outputs.isEmpty())// && !worldObj.isRemote)
+		if (outputs.isEmpty())
 		{
 			initInteractorsFromCoords();
 		}
@@ -462,7 +469,6 @@ public class TileEntityAdvancedRefiner extends TileEntityStoring implements ISyn
 
 	public float getHeat()
 	{
-		System.out.println(temperature);
 		return temperature;
 	}
 

@@ -7,18 +7,19 @@ import net.minecraft.item.ItemStack;
 
 public class TileEntityAdvancedRefinerInsertionLock extends TileEntityStoring implements IMultiblockInput, IMultiblockOutput
 {
+	private static int OUTPUT = 0;
+	
 	private TileEntityAdvancedRefiner refiner;
 
+	public TileEntityAdvancedRefinerInsertionLock()
+	{
+		super(1);		// This TileEntity will have 1 slot: output
+	}
+	
 	@Override
 	public String getInventoryName()
 	{
 		return Localization.Container.ADVANCED_REFINER_INSERTION_LOCK;
-	}
-
-	@Override
-	protected void initInvenory()
-	{
-		inventory = new ItemStack[1];
 	}
 
 	@Override
@@ -38,12 +39,12 @@ public class TileEntityAdvancedRefinerInsertionLock extends TileEntityStoring im
 	@Override
 	public ItemStack inputItem(Item item)
 	{
-		if (inventory[0] != null && inventory[0].getItem() == item)
+		if (inventory[OUTPUT] != null && inventory[OUTPUT].getItem() == item)
 		{
 			ItemStack retStack = inventory[0].splitStack(1);
-			if (inventory[0].stackSize <= 0)
+			if (inventory[OUTPUT].stackSize <= 0)
 			{
-				inventory[0] = null;
+				inventory[OUTPUT] = null;
 			}
 			return retStack;
 		}

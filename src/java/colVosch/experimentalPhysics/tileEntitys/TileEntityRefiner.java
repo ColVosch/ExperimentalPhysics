@@ -20,10 +20,9 @@ public class TileEntityRefiner extends TileEntityStoring implements ISynchroniza
 	private int currentProcessingTime = 0;
 	private boolean lit = false;
 	
-	@Override
-	protected void initInvenory()
+	public TileEntityRefiner()
 	{
-		inventory = new ItemStack[3];		
+		super(3);		// this TileEntity will have 3 slots: input, output and fuel
 	}
 
 	@Override

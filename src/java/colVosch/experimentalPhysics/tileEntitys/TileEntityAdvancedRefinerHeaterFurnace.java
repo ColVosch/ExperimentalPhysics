@@ -3,7 +3,6 @@ package colVosch.experimentalPhysics.tileEntitys;
 import colVosch.experimentalPhysics.reference.Localization;
 import colVosch.experimentalPhysics.util.Position;
 import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
@@ -18,10 +17,9 @@ public class TileEntityAdvancedRefinerHeaterFurnace extends TileEntityStoring im
 	private int itemBurnTime;
 	private int fuelTimeRemaining = 0;
 	
-	@Override
-	protected void initInvenory()
+	public TileEntityAdvancedRefinerHeaterFurnace()
 	{
-		inventory = new ItemStack[1];
+		super(3);		// This TileEntity will have 1 slot: fuel
 	}
 
 	@Override

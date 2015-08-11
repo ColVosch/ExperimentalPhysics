@@ -17,13 +17,9 @@ public abstract class TileEntityStoring extends TileEntityBasic implements IInve
 {
 	protected ItemStack[] inventory;
 	
-	/**Initialize an ItemStack array called inventory here. 
-	 */
-	protected abstract void initInvenory();
-	
-	public TileEntityStoring()
+	public TileEntityStoring(int inventorySize)
 	{
-		initInvenory();
+		inventory = new ItemStack[inventorySize];
 	}
 	
 	@Override
@@ -49,9 +45,8 @@ public abstract class TileEntityStoring extends TileEntityBasic implements IInve
 	public void readFromNBT(NBTTagCompound tagCompound)
 	{
 		super.readFromNBT(tagCompound);
-		initInvenory();
 		NBTTagList itemListNbt = tagCompound.getTagList("Items", NBT.TAG_COMPOUND);
-		
+		inventory = new ItemStack[itemListNbt.tagCount()];
 		for (int i = 0; i < itemListNbt.tagCount(); i++)
 		 {
 			 NBTTagCompound nbttagcompound = (NBTTagCompound)itemListNbt.getCompoundTagAt(i);
