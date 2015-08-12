@@ -97,19 +97,20 @@ public class SpaceField
 	
 	public void tryTriggerSpaceFieldEventAt(Position pos)
 	{
-		float strength = getTensionStrengthAt(pos);
+		float strength = getTensionAt(pos);
 		if (rndGen.nextFloat() <= Math.abs(strength) / 100) {
 			SpaceFieldEvents.triggerSpaceFieldEventAt(DimensionManager.getWorld(dimensionId), pos, strength, rndGen);
 		}
 	}
 	
-	public float getTensionStrengthAt(Position pos)
+	public float getTensionAt(Position pos)
 	{
 		float dist;
-		float strength = 0;
+		float strength = 0.0f;
 		for (TensionPoint tensionPoint : tensionPoints) {
 			dist = pos.getDistance(tensionPoint);
-			strength += (tensionPoint.strength / (Math.pow(dist, 2d) / Settings.getSpaceTensionRangeAmplifier() + 1));
+			strength += (tensionPoint.strength * Settings.getSpaceTensionRangeAmplifier()
+					/ (Math.pow(dist, 2.0d) + 1));
 		}
 		return strength;
 	}

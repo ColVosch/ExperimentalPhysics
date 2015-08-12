@@ -24,10 +24,12 @@ public class MinecraftTest
 
 	private static void initialize()
 	{
+		// Initialize FMLRelaunchLog without starting everything
 		try {
 			Field side = FMLRelaunchLog.class.getDeclaredField("side");
 			side.setAccessible(true);
 			side.set(null, Side.CLIENT);
+			side.setAccessible(false);
 		}
 		catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
 			e.printStackTrace();

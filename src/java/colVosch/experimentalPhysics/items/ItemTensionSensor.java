@@ -40,7 +40,7 @@ public class ItemTensionSensor extends Item
 		
 		if (!world.isRemote)
 		{
-			player.addChatMessage(new ChatComponentText(Float.toString(SpaceFieldManager.spaceFields.get(world.provider.dimensionId).getTensionStrengthAt(new Position(x, y, z)))));
+			player.addChatMessage(new ChatComponentText(Float.toString(SpaceFieldManager.spaceFields.get(world.provider.dimensionId).getTensionAt(new Position(x, y, z)))));
 		}
 		return true;
     }

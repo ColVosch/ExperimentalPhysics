@@ -4,7 +4,9 @@ import static java.lang.Math.pow;
 import static java.lang.Math.sqrt;
 
 import net.minecraft.block.Block;
+import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagInt;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 
@@ -14,16 +16,31 @@ import net.minecraft.world.IBlockAccess;
  */
 public class Position
 {
-	public int x;
-	public int y;
-	public int z;
+	public final int x;
+	public final int y;
+	public final int z;
 	
 	public static Position positionFromNBT(NBTTagCompound compound)
 	{
+		if (compound == null)
+			throw new IllegalArgumentException("The passed compound can not be null");
+		if (!(compound.hasKey("x") && compound.hasKey("y") && compound.hasKey("z")))
+			throw new IllegalArgumentException("Passed tag compound must contain x, y and z coordinates");
+		
 		int x, y, z;
-		x = compound.getInteger("x");
-		y = compound.getInteger("y");
-		z = compound.getInteger("z");
+		NBTBase xBase = compound.getTag("x");
+		NBTBase yBase = compound.getTag("y");
+		NBTBase zBase = compound.getTag("z");
+		
+		if (!(xBase  instanceof NBTTagInt
+				&& yBase  instanceof NBTTagInt
+				&& zBase  instanceof NBTTagInt))
+			throw new IllegalArgumentException("The passed compound seems to be corrupted,"
+					+ "data is of an incorrect type");
+		
+		x = ((NBTTagInt)xBase).func_150287_d();
+		y = ((NBTTagInt)yBase).func_150287_d();
+		z = ((NBTTagInt)zBase).func_150287_d();
 		return new Position(x, y, z);
 	}
 	
@@ -37,6 +54,10 @@ public class Position
 	public Position(int[] coords)
 	{
 		this(coords[0], coords[1], coords[2]);
+
+		if (coords.length != 3)
+			throw new IllegalArgumentException("The passed array must have a length of exactly three");
+	
 	}
 	
 	public int[] toIntArray()
