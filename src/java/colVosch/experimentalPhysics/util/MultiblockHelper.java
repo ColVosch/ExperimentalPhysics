@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.world.World;
+import net.minecraft.world.IBlockAccess;
 
-public class MultiblockHelper
+public class MultiBlockHelper
 {
 	/**Returns a list of all the positions inside a defined cube.
 	 * @param x coordinate of the cubes center
@@ -34,7 +34,7 @@ public class MultiblockHelper
 	}
 
 	/** Returns a list of all the blocks that are in a cube. The center of the cube is defined by the coordinates.
-	 * @param world
+	 * @param access
 	 * @param x
 	 * @param y
 	 * @param z
@@ -42,18 +42,18 @@ public class MultiblockHelper
 	 * 2 * cubeRadius + 1
 	 * @return a List of blocks (block types)
 	 */
-	public static List<Block> getBlocksInCube(World world, int x, int y, int z, int cubeRadius)
+	public static List<Block> getBlocksInCube(IBlockAccess access, int x, int y, int z, int cubeRadius)
 	{
 		List<Block> blocks = new ArrayList<Block>();
 		for(Position p : getCube(x, y, z, cubeRadius))
 		{
-			blocks.add(p.getBlock(world));
+			blocks.add(p.getBlock(access));
 		}
 		return blocks;
 	}
 	
-	public static int getCubeCenterIndex(int cubeRadius)
-	{
-		return ((((2 * cubeRadius + 1) ^ 3) - 1) / 2) + 1;	
-	}
+//	public static int getCubeCenterIndex(int cubeRadius)
+//	{
+//		return ((((2 * cubeRadius + 1) ^ 3) - 1) / 2) + 1;	
+//	}
 }

@@ -84,4 +84,19 @@ public class Position
 	{
 		return "(" + Integer.toString(x) + ", " + Integer.toString(y) + ", " + Integer.toString(z) + ")";
 	}
+	
+	@Override
+	public boolean equals(Object obj)
+	{
+		if (obj instanceof Position)
+		{
+			Position pos = (Position)obj;
+			if (this.x == pos.x
+					&& this.y == pos.y
+					&& this.z == pos.z) {
+				return true;
+			}
+		}
+		return false;
+	}
 }

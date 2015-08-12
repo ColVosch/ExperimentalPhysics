@@ -3,7 +3,7 @@ package colVosch.experimentalPhysics.blocks;
 import java.util.Random;
 
 import colVosch.experimentalPhysics.settings.SubstanceProperty;
-import colVosch.experimentalPhysics.util.MultiblockHelper;
+import colVosch.experimentalPhysics.util.MultiBlockHelper;
 import colVosch.experimentalPhysics.util.Position;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.IBlockAccess;
@@ -89,7 +89,7 @@ public abstract class BlockAdvancedRefinerPart extends PhysicsBlock
 	 */
 	protected Position findRefiner(World world, int x, int y, int z)
 	{
-		for (Position block : MultiblockHelper.getCube(x, y, z, 1))
+		for (Position block : MultiBlockHelper.getCube(x, y, z, 1))
 		{
 			if (block.getBlock(world) instanceof BlockAdvancedRefiner)
 			{

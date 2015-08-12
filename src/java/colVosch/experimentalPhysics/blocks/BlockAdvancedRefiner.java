@@ -8,7 +8,7 @@ import colVosch.experimentalPhysics.network.packets.PacketCoords;
 import colVosch.experimentalPhysics.settings.SubstanceProperty;
 import colVosch.experimentalPhysics.tileEntitys.TileEntityAdvancedRefiner;
 import colVosch.experimentalPhysics.tileEntitys.TileEntityStoring;
-import colVosch.experimentalPhysics.util.MultiblockHelper;
+import colVosch.experimentalPhysics.util.MultiBlockHelper;
 import colVosch.experimentalPhysics.util.Position;
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
@@ -53,7 +53,7 @@ public class BlockAdvancedRefiner extends BlockAdvancedRefinerPart implements IT
 	private boolean canForm(World world, int x, int y, int z)
 	{
 		boolean canForm = true;
-		List<Position> surroundingBlocks = MultiblockHelper.getCube(x, y, z, 1);
+		List<Position> surroundingBlocks = MultiBlockHelper.getCube(x, y, z, 1);
 		for (Position block : surroundingBlocks)
 		{
 			canForm = (block.getBlock(world) instanceof BlockAdvancedRefinerPart && (block.getMeta(world) == 0));
@@ -71,7 +71,7 @@ public class BlockAdvancedRefiner extends BlockAdvancedRefinerPart implements IT
 		{
 			PacketController.getNetworkWrapper().sendToAll(new PacketCoords(x, y, z, HandlerCoords.ID_FORM_ADVANCED_REFINER));
 		}
-		for (Position casing : MultiblockHelper.getCube(x, y, z, 1))
+		for (Position casing : MultiBlockHelper.getCube(x, y, z, 1))
 		{
 			Block block = casing.getBlock(world);
 			if (block instanceof BlockAdvancedRefinerPart)
@@ -101,7 +101,7 @@ public class BlockAdvancedRefiner extends BlockAdvancedRefinerPart implements IT
 		{
 			PacketController.getNetworkWrapper().sendToAll(new PacketCoords(x, y, z, HandlerCoords.ID_UNFORM_ADVANCED_REFINER));
 		}
-		for (Position casing : MultiblockHelper.getCube(x, y, z, 1))
+		for (Position casing : MultiBlockHelper.getCube(x, y, z, 1))
 		{
 			if (casing.getBlock(world) instanceof BlockAdvancedRefinerPart)
 			{
@@ -151,7 +151,7 @@ public class BlockAdvancedRefiner extends BlockAdvancedRefinerPart implements IT
 	public short getMaxStructureHeat(World world, int xCoord, int yCoord, int zCoord)
 	{
 		short maxHeat = Short.MIN_VALUE;
-		for (Position pos : MultiblockHelper.getCube(xCoord, yCoord, zCoord, 1))
+		for (Position pos : MultiBlockHelper.getCube(xCoord, yCoord, zCoord, 1))
 		{
 			Block block = pos.getBlock(world);
 			if (block instanceof BlockAdvancedRefinerPart)
@@ -165,7 +165,7 @@ public class BlockAdvancedRefiner extends BlockAdvancedRefinerPart implements IT
 	public float getAverageCoolDownConstant(World world, int x, int y, int z)
 	{
 		float sum = 0f;
-		for (Position p : MultiblockHelper.getCube(x, y, z, 1))
+		for (Position p : MultiBlockHelper.getCube(x, y, z, 1))
 		{
 			sum += p.getBlock(world) instanceof BlockAdvancedRefinerPart 
 					? ((BlockAdvancedRefinerPart) p.getBlock(world)).getCoolDownConstant() 

@@ -1,7 +1,7 @@
 package colVosch.experimentalPhysics.items;
 
 import colVosch.experimentalPhysics.blocks.ModBlocks;
-import colVosch.experimentalPhysics.util.MultiblockHelper;
+import colVosch.experimentalPhysics.util.MultiBlockHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemBlock;
@@ -22,7 +22,7 @@ public class ItemBlockAdvancedRefiner extends ItemBlock
 	@Override
 	public boolean onItemUse(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z, int p_77648_7_, float p_77648_8_, float p_77648_9_, float p_77648_10_)
 	{
-		if (!MultiblockHelper.getBlocksInCube(world, x, y, z, 2).contains(ModBlocks.advancedRefiner))
+		if (!MultiBlockHelper.getBlocksInCube(world, x, y, z, 2).contains(ModBlocks.advancedRefiner))
 		{
 			return super.onItemUse(itemStack, player, world, x, y, z, p_77648_7_, p_77648_8_, p_77648_9_, p_77648_10_);
 		}
