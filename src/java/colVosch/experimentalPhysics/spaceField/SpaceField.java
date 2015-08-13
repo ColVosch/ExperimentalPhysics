@@ -18,14 +18,14 @@ public class SpaceField
 {
 	public int dimensionId;
 	private ArrayList<TensionPoint> tensionPoints;
-	private byte tickCounter = 0;
+	private byte spaceFieldCooldown = 0;
 	
 	public Random rndGen;
 	
 	public SpaceField(int dimensionId)
 	{
 		tensionPoints = new ArrayList<TensionPoint>();
-		tickCounter = 0;
+		spaceFieldCooldown = 0;
 		rndGen = new Random();
 		
 		this.dimensionId = dimensionId;
@@ -38,7 +38,7 @@ public class SpaceField
 			tensionPoints.add(TensionPoint.tensionPointFromNBT(tensionTagList.getCompoundTagAt(i)));
 		}
 		
-		tickCounter = 0;
+		spaceFieldCooldown = 0;
 	}
 
 	public NBTTagList writeToNBT()
@@ -68,12 +68,56 @@ public class SpaceField
 		}
 	}
 
+	public void update()
+	{
+		spaceFieldCooldown ++;
+		spaceFieldCooldown %= Settings.getSpaceEventFrequency();
+		if (spaceFieldCooldown <= 0) {
+			Position pos = getSpaceFieldEventPosition();
+			if (pos != null) {
+				float strength = getTensionAt(pos);
+				float probabillity = getSpaceFieldEventProbabillity(strength);
+				assert probabillity >= 0 : "Negative probabillities don't seem correct...";
+				if (this.rndGen.nextFloat() <= probabillity) {
+					SpaceFieldEvents.triggerSpaceFieldEventAt(
+							DimensionManager.getWorld(dimensionId), pos, strength, rndGen);
+				} 
+			}
+		}
+	}
+	
+	private float getSpaceFieldEventProbabillity(float strength)
+	{
+		return 1 - (1 / (1 + Math.abs(strength) / Settings.getSpaceTensionImpactDampener()));
+	}
+
+	private Position getSpaceFieldEventPosition()
+	{
+		int xOffset, zOffset, x, y, z;
+		xOffset = rndGen.nextInt(1024) - 512;
+		zOffset = rndGen.nextInt(1024) - 512;		
+		
+		List<?> players = DimensionManager.getWorld(dimensionId).playerEntities;
+		if (players.size() == 0) {
+			return null;
+		}
+		
+		//TODO change to minecraft @ r (if found)
+		EntityPlayer player = (EntityPlayer) (players.size() == 1 ? players.get(0) : players.get(rndGen.nextInt(players.size() - 1)));
+		
+		x = (int) player.posX + xOffset;
+		y = rndGen.nextInt(256);
+		z = (int) player.posZ + zOffset;
+		return new Position(x, y, z);
+	}
+
+	@Deprecated
 	public void tryTriggerSpaceFieldEvent()
 	{
-		tickCounter ++;
-		tickCounter %= Settings.getSpaceEventFrequency();
+		spaceFieldCooldown ++;
+		spaceFieldCooldown %= Settings.getSpaceEventFrequency();
 		
-		if (tickCounter != 0) {
+		if (spaceFieldCooldown != 0) {
 			return;
 		}
 		
@@ -88,13 +132,14 @@ public class SpaceField
 		zOffset = rndGen.nextInt(1024) - 512;
 		
 		//TODO change to minecraft @ r (if found)
-		EntityPlayer player = (EntityPlayer) (players.size() == 1 ? players.get(0) : players.get(rndGen.nextInt(players.size() - 1)));
+		EntityPlayer player = (EntityPlayer) (players.get(rndGen.nextInt(players.size())));
 		
 		x = (int) player.posX + xOffset;
 		z = (int) player.posZ + zOffset;
 		tryTriggerSpaceFieldEventAt(new Position(x, y, z));
 	}
 	
+	@Deprecated
 	public void tryTriggerSpaceFieldEventAt(Position pos)
 	{
 		float strength = getTensionAt(pos);

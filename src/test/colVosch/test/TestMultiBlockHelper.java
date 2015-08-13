@@ -54,6 +54,7 @@ public class TestMultiBlockHelper extends MinecraftTest
 	@Test
 	public final void testGetBlocksInCube()
 	{
+		// TODO
 //		fail("Not yet implemented"); // TODO
 	}
 	

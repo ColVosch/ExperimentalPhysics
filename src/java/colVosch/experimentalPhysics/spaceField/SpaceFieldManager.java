@@ -18,12 +18,15 @@ import net.minecraftforge.event.world.WorldEvent.Save;
 
 public class SpaceFieldManager
 {	
-	public static HashMap<Integer, SpaceField> spaceFields = new HashMap<Integer, SpaceField>();
+	public static HashMap<Integer, SpaceField> spaceFields = new HashMap<Integer, SpaceField>();	// TODO replace with getter
 	
 	@SubscribeEvent
 	public void saveField(Save saveEvent)
 	{
-		if (!(saveEvent.world instanceof WorldServer)) {return;}
+		if (!(saveEvent.world instanceof WorldServer)) {
+			System.out.println("Saving the world on the client side?");		// TODO check
+			return;
+		}
 		
 		WorldServer world = (WorldServer) saveEvent.world;
 		
@@ -32,16 +35,13 @@ public class SpaceFieldManager
 		
 		File path = (new File(world.getChunkSaveLocation(), "ExperimentalPhysics"));
 		File location = new File(path, "SpaceFieldDIM"+ Integer.toString(world.provider.dimensionId) +".dat");
-		if (!location.exists())
-		{
+		if (!location.exists()) {
 			path.mkdirs();
 		}
-		try
-        {
+		try {
             CompressedStreamTools.write(spaceFieldTag, location);
         }
-        catch (IOException e)
-        {
+        catch (IOException e) {
             FMLLog.log(Level.WARN, e, "Unable to write space field data to %s", location.getAbsolutePath());
             return;
         }
@@ -76,11 +76,12 @@ public class SpaceFieldManager
 	}
 	
 	@SubscribeEvent
-	public void attemptSpaceFieldEvent(WorldTickEvent e)
+	public void updateSpaceField(WorldTickEvent e)
 	{
 		if (e.side == Side.SERVER)
 		{
-			spaceFields.get(e.world.provider.dimensionId).tryTriggerSpaceFieldEvent();
+			spaceFields.get(e.world.provider.dimensionId).update();
+			//spaceFields.get(e.world.provider.dimensionId).tryTriggerSpaceFieldEvent();
 		}
 	}
 }

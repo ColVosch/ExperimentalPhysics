@@ -53,6 +53,11 @@ public class Settings
 		return spaceTensionRangeAmplifier;
 	}
 
+	public static float getSpaceTensionImpactDampener()
+	{
+		return 11.11111111f;
+	}
+	
 	public static int getSpaceEventFrequency()
 	{
 		return spaceEventFrequency;
