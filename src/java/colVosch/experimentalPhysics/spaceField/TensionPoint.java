@@ -2,6 +2,7 @@ package colVosch.experimentalPhysics.spaceField;
 
 import colVosch.experimentalPhysics.util.Position;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagInt;
 
 public class TensionPoint extends Position
 {
@@ -9,8 +10,15 @@ public class TensionPoint extends Position
 
 	public static TensionPoint tensionPointFromNBT(NBTTagCompound compound)
 	{
-		int readStrength;
-		readStrength = compound.getInteger("strength");
+		if (compound == null)
+			throw new IllegalArgumentException("The passed compound can not be null");
+		if (!compound.hasKey("strength"))
+			throw new IllegalArgumentException("The passed compound must contain a strength value");
+		if (!(compound.getTag("strength") instanceof NBTTagInt))
+			throw new IllegalArgumentException("The passed compound seems to be corrupted,"
+					+ "data is of an incorrect type");
+
+		int readStrength = compound.getInteger("strength");
 		return new TensionPoint(Position.positionFromNBT(compound), readStrength);
 	}
 	
@@ -32,14 +40,12 @@ public class TensionPoint extends Position
 	public boolean equals(Object obj)
 	{
 		return super.equals(obj)
+				&& obj instanceof TensionPoint
 				&& ((TensionPoint)obj).strength == this.strength;
 	}
 	
 	public boolean hasEqualPosition(Position pos)
 	{
 		return super.equals(pos);
-//		return this.x == pos.x
-//				&& this.y == pos.y
-//				&& this.z == pos.z;
 	}
 }
