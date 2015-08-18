@@ -36,4 +36,9 @@ public class NBTHelper
 		compound.setTag(key, tag);
 		return tag;
 	}
+	
+	public boolean checkTagCompound(String[] keys, Class<? extends NBTBase>[] types, NBTTagCompound compound)
+	{
+		return false;
+	}
 }

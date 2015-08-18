@@ -2,11 +2,12 @@ package colVosch.experimentalPhysics.settings;
 
 public class Settings
 {
-	private static float coolDownFactor;
-	private static int maxHeatIron;
-	private static float coolDownConstantIron;
-	private static int spaceTensionRangeAmplifier;
-	private static int spaceEventFrequency;
+	private static float coolDownFactor = 0.02f;
+	private static int maxHeatIron = 1538;
+	private static float coolDownConstantIron = 0.1f;
+	private static int spaceTensionRangeAmplifier = 1;
+	private static int spaceEventDelay = 20;
+	private static float spaceTensionImpactDampener = 11.11111111f;
 
 	protected static void setCoolDownFactor(float coolDownFactor)
 	{
@@ -28,9 +29,9 @@ public class Settings
 		Settings.spaceTensionRangeAmplifier = spaceTensionRangeAmplifier;
 	}
 
-	protected static void setSpaceEventFrequency(int spaceEventFrequency)
+	protected static void setSpaceEventDelay(int spaceEventDelay)
 	{
-		Settings.spaceEventFrequency = spaceEventFrequency;
+		Settings.spaceEventDelay = spaceEventDelay;
 	}
 
 	public static float getCoolDownFactor()
@@ -55,12 +56,12 @@ public class Settings
 
 	public static float getSpaceTensionImpactDampener()
 	{
-		return 11.11111111f;
+		return spaceTensionImpactDampener;
 	}
 	
 	public static int getSpaceEventFrequency()
 	{
-		return spaceEventFrequency;
+		return spaceEventDelay;
 	}
 	
 }

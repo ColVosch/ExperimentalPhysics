@@ -23,7 +23,7 @@ public class Position
 	public static Position positionFromNBT(NBTTagCompound compound)
 	{
 		if (compound == null)
-			throw new IllegalArgumentException("The passed compound can not be null");
+			throw new IllegalArgumentException("The passed compound can not be null");		// TODO change to NullPointer?
 		if (!(compound.hasKey("x") && compound.hasKey("y") && compound.hasKey("z")))
 			throw new IllegalArgumentException("Passed tag compound must contain x, y and z coordinates");
 		
@@ -68,7 +68,11 @@ public class Position
 
 	public float getDistance(Position pos)
 	{
-		float dist = (float) sqrt(pow(this.x - pos.x, 2) + pow(this.y - pos.y, 2) + pow(this.z - pos.z, 2));
+		// Pythagoras
+		float dist = (float) sqrt(
+				pow(this.x - pos.x, 2)
+				+ pow(this.y - pos.y, 2)
+				+ pow(this.z - pos.z, 2));
 		return dist;
 	}
 	

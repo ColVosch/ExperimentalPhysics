@@ -33,7 +33,7 @@ public class SpaceFieldManager
 		NBTTagCompound spaceFieldTag = new NBTTagCompound();
 		spaceFieldTag.setTag("Data", spaceFields.get(world.provider.dimensionId).writeToNBT());
 		
-		File path = (new File(world.getChunkSaveLocation(), "ExperimentalPhysics"));
+		File path = (new File(world.getChunkSaveLocation(), "ExperimentalPhysics"));	// TODO Move to File I/O
 		File location = new File(path, "SpaceFieldDIM"+ Integer.toString(world.provider.dimensionId) +".dat");
 		if (!location.exists()) {
 			path.mkdirs();
@@ -76,7 +76,7 @@ public class SpaceFieldManager
 	}
 	
 	@SubscribeEvent
-	public void updateSpaceField(WorldTickEvent e)
+	public void updateSpaceField(WorldTickEvent e)		// TODO ServerTickEvent?
 	{
 		if (e.side == Side.SERVER)
 		{

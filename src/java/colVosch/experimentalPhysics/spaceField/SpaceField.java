@@ -75,18 +75,19 @@ public class SpaceField
 		if (spaceFieldCooldown <= 0) {
 			Position pos = getSpaceFieldEventPosition();
 			if (pos != null) {
-				float strength = getTensionAt(pos);
-				float probabillity = getSpaceFieldEventProbabillity(strength);
+				float tension = getTensionAt(pos);
+				float probabillity = getSpaceFieldEventProbability(tension);
 				assert probabillity >= 0 : "Negative probabillities don't seem correct...";
 				if (this.rndGen.nextFloat() <= probabillity) {
 					SpaceFieldEvents.triggerSpaceFieldEventAt(
-							DimensionManager.getWorld(dimensionId), pos, strength, rndGen);
+							DimensionManager.getWorld(dimensionId), pos, tension, rndGen);
+					// TODO timer
 				} 
 			}
 		}
 	}
 	
-	private float getSpaceFieldEventProbabillity(float strength)
+	private float getSpaceFieldEventProbability(float strength)
 	{
 		return 1 - (1 / (1 + Math.abs(strength) / Settings.getSpaceTensionImpactDampener()));
 	}
@@ -103,7 +104,7 @@ public class SpaceField
 		}
 		
 		//TODO change to minecraft @ r (if found)
-		EntityPlayer player = (EntityPlayer) (players.size() == 1 ? players.get(0) : players.get(rndGen.nextInt(players.size() - 1)));
+		EntityPlayer player = (EntityPlayer) (players.get(rndGen.nextInt(players.size())));
 		
 		x = (int) player.posX + xOffset;
 		y = rndGen.nextInt(256);
@@ -151,12 +152,12 @@ public class SpaceField
 	public float getTensionAt(Position pos)
 	{
 		float dist;
-		float strength = 0.0f;
-		for (TensionPoint tensionPoint : tensionPoints) {
+		float tension = 0.0f;
+		for (TensionPoint tensionPoint : tensionPoints) {		// TODO re-think
 			dist = pos.getDistance(tensionPoint);
-			strength += (tensionPoint.strength * Settings.getSpaceTensionRangeAmplifier()
+			tension += (tensionPoint.strength * Settings.getSpaceTensionRangeAmplifier()
 					/ (Math.pow(dist, 2.0d) + 1));
 		}
-		return strength;
+		return tension;
 	}
 }
