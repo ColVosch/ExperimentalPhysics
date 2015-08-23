@@ -11,6 +11,7 @@ import cpw.mods.fml.relauncher.Side;
 @Ignore
 public class MinecraftTest
 {
+	protected static final float PRECISION = 0.0001f;
 	private static boolean initialized = false;
 	
 	@BeforeClass

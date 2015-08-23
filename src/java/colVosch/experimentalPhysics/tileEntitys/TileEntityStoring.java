@@ -1,5 +1,6 @@
 package colVosch.experimentalPhysics.tileEntitys;
 
+import cpw.mods.fml.common.FMLLog;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -19,6 +20,7 @@ public abstract class TileEntityStoring extends TileEntityBasic implements IInve
 	
 	public TileEntityStoring(int inventorySize)
 	{
+		FMLLog.info("Setting inventory size of %s to %d", this.getClass().getSimpleName(), inventorySize);
 		inventory = new ItemStack[inventorySize];
 	}
 	
@@ -46,7 +48,7 @@ public abstract class TileEntityStoring extends TileEntityBasic implements IInve
 	{
 		super.readFromNBT(tagCompound);
 		NBTTagList itemListNbt = tagCompound.getTagList("Items", NBT.TAG_COMPOUND);
-		inventory = new ItemStack[itemListNbt.tagCount()];
+		//inventory = new ItemStack[itemListNbt.tagCount()];
 		for (int i = 0; i < itemListNbt.tagCount(); i++)
 		 {
 			 NBTTagCompound nbttagcompound = (NBTTagCompound)itemListNbt.getCompoundTagAt(i);
